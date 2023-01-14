@@ -65,3 +65,9 @@ services:
 #     -p 8080:80 \
 #     filebrowser/filebrowser:s6
 ```
+
+```sh
+docker compose up -d
+docker compose stop
+docker compose up -d
+```
