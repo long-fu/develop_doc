@@ -41,3 +41,5 @@ export PATH="/usr/local/cuda-11.6/bin:$PATH"
 source ~/.bashrc
 
 http://localhost:8888/lab?token=a4ec03b2a80e3bec288e8169e8c99356383eccbc03fb36f4
+
+dWl1MmpwNzZ1NjBwN3I4M2w4ZXFvdmlmMWk6N2I0ODIxYWEtMjg2ZC00YjcyLTk2YmEtZDVkZmYxOTBmYjNh
