@@ -115,14 +115,27 @@ docker rmi --force $(docker images | grep some | awk '{print $3}')
 
 **ubuntu系统快速修改Docker默认镜像存放地址**
 
-1. 首先查询当前docker存放地址：sudo docker info | grep "Docker Root Dir"，通常地址位于：
 
-/var/lib/docker
+```sh
+# 1. 首先查询当前docker存放地址：`sudo docker info | grep Docker Root Dir`，通常地址位于： /var/lib/docker
+sudo docker info | grep Docker Root Dir
 
-2. 将当前目录复制到要存放的扩展盘上 : mv /var/lib/docker /data/docker
+# 2. 将当前目录复制到要存放的扩展盘上 : mv /var/lib/docker /data/docker
+ln -s /path/docker /var/lib/docker
 
-3. ln -s /data/docker /var/lib/docker
+# 3. 创建软连接
+ln -s /data/docker /var/lib/docker
+# 4. 重启docker服务：sudo systemctl restart docker
 
-4. 重启docker服务：sudo systemctl restart docker
+sudo systemctl restart docker
+# 5. 再次查看，docker存放地址，发现正常使用，说明修改正确。
+sudo docker info | grep Docker Root Dir
 
-5. 再次查看，docker存放地址，发现正常使用，说明修改正确。
+```
+
+
+
+
+
+
+
