@@ -135,7 +135,11 @@ sudo docker info | grep Docker Root Dir
 
 
 
+**Docker从容器内拷贝文件到主机上**
 
 
 
 
+docker cp <containerId>:/file/path/within/container /host/path/target
+
+docker cp ea6477f33e0a:/opt/nvidia/deepstream/deepstream-6.1/samples/configs/deepstream-app/out_source0.mp4 ~
