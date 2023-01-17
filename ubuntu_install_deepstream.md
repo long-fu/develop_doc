@@ -50,3 +50,23 @@ source ~/.bashrc
 http://localhost:8888/lab?token=a4ec03b2a80e3bec288e8169e8c99356383eccbc03fb36f4
 
 dWl1MmpwNzZ1NjBwN3I4M2w4ZXFvdmlmMWk6N2I0ODIxYWEtMjg2ZC00YjcyLTk2YmEtZDVkZmYxOTBmYjNh
+
+Run the container
+To run the container:
+
+Allow external applications to connect to the host's X display:
+xhost +
+Run the docker container (use the desired container tag in the command line below):
+If using docker (recommended):
+docker run --gpus all -it --rm --net=host --privileged -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY -w /opt/nvidia/deepstream/deepstream-6.1 nvcr.io/nvidia/deepstream:6.1.1-devel
+If using nvidia-docker (deprecated) based on a version of docker prior to 19.03:
+
+nvidia-docker run -it --rm -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY -w /opt/nvidia/deepstream/deepstream-6.1  nvcr.io/nvidia/deepstream:6.1.1-devel
+Note that the command mounts the host's X11 display in the guest filesystem to render output videos.
+
+Additional Installations to use all DeepStreamSDK Features within the docker container.
+With DS 6.1.1, DeepStream docker containers do not package libraries necessary for certain multimedia operations like audio data parsing, CPU decode, and CPU encode. This change could affect processing certain video streams/files like mp4 that include audio tracks.
+
+Please run the below script inside the docker images to install additional packages that might be necessary to use all of the DeepStreamSDK features :
+
+/opt/nvidia/deepstream/deepstream/user_additional_install.sh
