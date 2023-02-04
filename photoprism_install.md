@@ -1,9 +1,13 @@
 ## 图床服务器配置
 
--[photoprism](https://photoprism.app/)
--[photoprism github](https://github.com/photoprism/photoprism)
--[photoprism api go](https://github.com/krisnova/photoprism-client-go)
--[photoprism api python](https://github.com/mvlnetdev/photoprism_client)
+- [photoprism](https://photoprism.app/)
+- [photoprism github](https://github.com/photoprism/photoprism)
+- [photoprism api go](https://github.com/krisnova/photoprism-client-go)
+- [photoprism api python](https://github.com/mvlnetdev/photoprism_client)
+- [docker-compose](https://docs.photoprism.app/getting-started/docker-compose/)
+```sh
+vim docker-compose.yml
+```
 
 ```yml
 version: '3.5'
@@ -144,5 +148,16 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "~/.docker/config.json:/config.json" # optional, for authentication if you have a Docker Hub account
+```
+
+run 
+
+```sh
+
+docker-compose up
+
+docker-compose up -d
+
+docker-compose stop
 
 ```
