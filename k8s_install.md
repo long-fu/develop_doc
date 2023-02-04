@@ -37,17 +37,17 @@
 
 - **etcd:** 保存了整个集群的状态；
 
--  **apiserver:** 提供了资源操作的唯一入口，并提供认证、授- 权、访问控制、API注册和发现等机制；
+- **apiserver:** 提供了资源操作的唯一入口，并提供认证、授- 权、访问控制、API注册和发现等机制；
 
--  **controller manager:** 负责维护集群的状态，比如故障检测、自动扩展、滚动更新等；
+- **controller manager:** 负责维护集群的状态，比如故障检测、自动扩展、滚动更新等；
 
--  **scheduler:** 负责资源的调度，按照预定的调度策略将Pod调度到相应的机器上；
+- **scheduler:** 负责资源的调度，按照预定的调度策略将Pod调度到相应的机器上；
 
--  **kubelet:** 负责维护容器的生命周期，同时也负责Volume（CVI）和网络（CNI）的管理；
+- **kubelet:** 负责维护容器的生命周期，同时也负责Volume（CVI）和网络（CNI）的管理；
 
--  **Container runtime:** 负责镜像管理以及Pod和容器的真正运行（CRI）；
+- **Container runtime:** 负责镜像管理以及Pod和容器的真正运行（CRI）；
 
--  **kube-proxy:** 负责为Service提供cluster内部的服务发现和负载均衡；
+- **kube-proxy:** 负责为Service提供cluster内部的服务发现和负载均衡；
 
 **除了核心组件，还有一些推荐的Add-ons：**
 
@@ -63,12 +63,13 @@
 > **说明：**
 > Docker Engine 没有实现 CRI， 而这是容器运行时在 Kubernetes 中工作所需要的。 为此，必须安装一个额外的服务 cri-dockerd。 cri-dockerd 是一个基于传统的内置 Docker 引擎支持的项目， **它在 1.24 版本从 kubelet 中移除**。
 
-
 **依赖**
 
 - [环境配置](https://kubernetes.io/zh-cn/docs/setup/production-environment/container-runtimes/)
 
 1. 关闭交换分区 
+
+安装K8S需要**关闭交换分区**
 
 ```sh
 # 临时关闭
@@ -119,8 +120,6 @@ lsmod | grep overlay
 sysctl net.bridge.bridge-nf-call-iptables net.bridge.bridge-nf-call-ip6tables net.ipv4.ip_forward
 ```
 
-安装K8S需要**关闭交换分区**
-
 **安装**
 
 - [阿里云安装k8s](https://developer.aliyun.com/mirror/kubernetes?spm=5176.21213303.J_6704733920.7.728b53c9nPhQpE&scm=20140722.S_other%40%40%E7%BD%91%E7%AB%99%40%40httpsdeveloperaliyunc._.ID_other%40%40%E7%BD%91%E7%AB%99%40%40httpsdeveloperaliyunc-RL_Kubernetes-LOC_main-OR_ser-V_2-P0_0)
@@ -133,22 +132,22 @@ sysctl net.bridge.bridge-nf-call-iptables net.bridge.bridge-nf-call-ip6tables ne
 ```sh
 
 # 更新 apt 包索引并安装使用 Kubernetes apt 仓库所需要的包：
-apt-get update && apt-get install -y apt-transport-https
+sudo apt-get update && apt-get install -y apt-transport-https
 
 #下载 aliyun 公开签名秘钥：
-curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add - 
+sudo curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | sudo apt-key add - 
 
 # 添加 Kubernetes apt 仓库：
-cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
+sudo cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
 deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
 EOF
 
 # 更新 apt 包索引，安装 kubelet、kubeadm 和 kubectl，并锁定其版本：
-apt-get update
+sudo apt-get update
 
-apt-get install -y kubelet kubeadm kubectl
+sudo apt-get install -y kubelet kubeadm kubectl
 
-apt-mark hold kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
 
 ```
 
@@ -159,11 +158,21 @@ apt-mark hold kubelet kubeadm kubectl
 
 - [部署k8s](https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/)
 
-
-
 ### 安装网络插件
 
 [Calico](https://projectcalico.docs.tigera.io/about/about-calico) 
 [Flannel](https://github.com/flannel-io/flannel) 
 [Open vSwitch (OVS)](http://www.openvswitch.org/) 
 [Weave](https://www.weave.works/) 
+
+## 多集群配置
+
+## 高可用(HA)配置
+
+[k8s高可用部署](https://github.com/sskcal/kubernetes/tree/main/vipk8s)
+
+[k8s高可用部署 视频教程](https://www.bilibili.com/video/BV15z4y1r7Kw/?spm_id_from=333.337.search-card.all.click&vd_source=2a18e529afba9d517bd1187c8f358246)
+
+
+[什么是高可用](https://blog.51cto.com/dengaosky/1964543)
+
