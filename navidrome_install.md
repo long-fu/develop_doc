@@ -8,6 +8,10 @@
 [filebrowser](https://filebrowser.org/)
 [github](https://github.com/filebrowser/filebrowser)
 
+```sh
+vim docker-compose.yml
+```
+
 ```yml
 version: "3"
 services:
@@ -66,8 +70,13 @@ services:
 #     filebrowser/filebrowser:s6
 ```
 
+
 ```sh
-docker compose up -d
-docker compose stop
-docker compose up -d
+
+docker-compose up
+
+docker-compose up -d
+
+docker-compose stop
+
 ```
