@@ -98,6 +98,7 @@ sudo docker rmi $(docker images -f "dangling=true" -q) #删除所有镜像
 docker stop $(docker ps -qa)
 docker rm $(docker ps -qa)
 ```
+
 ```sh
 
 
