@@ -1,0 +1,36 @@
+---
+- hosts: k8s
+  gather_facts: no
+  tasks:
+    - name: uninstall old versions
+      shell: yum remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-engine
+    - name: install utils
+      yum:
+        name: yum-utils
+    - name: set up the repository
+      shell: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+    - name: Install Docker Engine
+      yum: 
+        name: "{{ packages }}"
+      vars:
+        packages:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-compose-plugin
+    - name: mkdir /etc/docker
+      shell: |
+        if [ ! -d /etc/docker ] ; then mkdir /etc/docker ; fi
+    - name: create daemon.json
+      shell: 
+        cmd: |
+          cat <<EOF | tee /etc/docker/daemon.json
+          {
+              "exec-opts": ["native.cgroupdriver=systemd"],
+              "log-opts": {
+                  "max-size": "100m"
+              }
+          }
+          EOF
+    - name: restart docker
+      shell: systemctl enable --now docker && systemctl daemon-reload && systemctl restart docker

@@ -1,0 +1,14 @@
+[k8smaster]
+112.74.52.83 hostname=k8s-master01
+119.23.226.24 hostname=k8s-master02
+119.23.231.199 hostname=k8s-master03
+
+[k8sworker]
+192.168.99.139 hostname=k8s-work1
+
+[k8s:children]
+k8smaster
+k8sworker
+
+[all:vars]
+ansible_ssh_user=root

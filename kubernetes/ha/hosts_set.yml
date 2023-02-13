@@ -1,0 +1,18 @@
+---
+- hosts: k8s
+  gather_facts: no
+  tasks:
+    - name: set hosts
+      shell:
+        cmd: |
+            cat <<EOF >> /etc/hosts
+
+            192.168.99.101 k8s-vip
+            192.168.99.138 k8s-work3
+            192.168.99.139 k8s-work1
+            192.168.99.140 k8s-work2
+            192.168.99.141 k8s-master1
+            192.168.99.142 k8s-master2
+            192.168.99.143 k8s-master3
+
+            EOF
