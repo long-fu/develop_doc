@@ -1,0 +1,22 @@
+---
+- hosts: k8smaster
+  gather_facts: no
+  tasks:
+  - name: install ha
+    shell: yum install haproxy keepalived -y
+  - name: bak config
+    shell: mv /etc/keepalived/keepalived.conf /etc/keepalived/keepalived.conf.bak & mv /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bak
+  - name: copy haproxy.cf
+    copy:
+      src: /home/haoshuai/code/k8s/k8s/ha/etc/haproxy/haproxy.cfg
+      dest: /etc/haproxy/haproxy.cfg
+  - name: copy check_apiserver.sh
+    copy:
+      src: /home/haoshuai/code/k8s/k8s/ha/etc/keepalived/check_apiserver.sh
+      dest: /etc/keepalived/check_apiserver.sh
+  - name: copy keepalived.conf
+    copy:
+      src: /home/haoshuai/code/k8s/k8s/ha/etc/keepalived/keepalived.conf
+      dest: /etc/keepalived/keepalived.conf
+  - name: chmod
+    shell: chmod +x /etc/keepalived/check_apiserver.sh
