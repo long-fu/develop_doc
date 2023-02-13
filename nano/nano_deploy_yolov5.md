@@ -244,8 +244,11 @@ deepstream-app -c deepstream_app_config.txt
 ```
 
 ![gif](images/FP32-yolov5s.gif)
+
 [deepstream](https://developer.nvidia.com/deepstream-getting-started)
+
 [deepstream历史版本](https://developer.nvidia.com/embedded/deepstream-on-jetson-downloads-archived)
+
 [在jetson平台上安装](https://docs.nvidia.com/metropolis/deepstream/dev-guide/text/DS_Quickstart.html#jetson-setup)
 
 -----------------------------------------
