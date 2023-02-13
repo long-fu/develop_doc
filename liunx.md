@@ -98,6 +98,7 @@ sudo docker rmi $(docker images -f "dangling=true" -q) #删除所有镜像
 docker stop $(docker ps -qa)
 docker rm $(docker ps -qa)
 ```
+
 ```sh
 
 
@@ -145,6 +146,7 @@ docker cp <containerId>:/file/path/within/container /host/path/target
 docker cp ea6477f33e0a:/opt/nvidia/deepstream/deepstream-6.1/samples/configs/deepstream-app/out_source0.mp4 ~
 
 **[dockerfile 学习](https://www.runoob.com/docker/docker-dockerfile.html)**
+
 [使用 Dockerfile 定制镜像](https://yeasy.gitbook.io/docker_practice/image/build)
 
 kubectl describe pods name -n namespase
