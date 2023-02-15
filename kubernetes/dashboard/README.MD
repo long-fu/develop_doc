@@ -98,17 +98,3 @@ spec:
               number: 443
 EOF
 ```
-
-
-spec:
-  ingressClassName: nginx-kubernetes-dashboard
-  rules:
-    http:
-      paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service: 
-               name: kubernetes-dashboard
-               port: 
-                 number: 443
