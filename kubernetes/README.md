@@ -71,8 +71,9 @@ kubectl delete namespace [namespace]
 kubectl delete namespace kubeedge
 kubectl delete namespace kubeedge  --force --grace-period=0
 # 给node加上标签
-kubectl label label [node name] [label key=vaalue]
-kubectl label label k8s-work2 app=cloud-core 
+kubectl label node  [node name] [label key=vaalue]
+kubectl label nodek 8s-work2 app=cloud-core 
+kubectl label node  k8s-master02 app=dashboard
 
 # 删除node 标签
 kubectl label node [node name] [label key-]
@@ -148,6 +149,12 @@ kubectl logs redis-554b4666d8-glpcf -c redis
 # 去除 K8s master 节点的污点
 kubectl taint nodes --all node-role.kubernetes.io/master-
 
+kubectl -n kubernetes-dashboard delete serviceaccount admin-user
+kubectl -n kubernetes-dashboard delete clusterrolebinding admin-user
+
+kubectl -n kubernetes-dashboard get serviceaccount
+
+kubectl -n kubernetes-dashboard get clusterrolebinding 
 ```
 
 

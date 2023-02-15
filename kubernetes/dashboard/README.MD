@@ -43,6 +43,7 @@ kubectl apply -f dash-admin-user.yml
 2. 获取token
 
 ```sh
+kubectl -n kubernetes-dashboard create token admin-user
 kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')
 ```
 
@@ -72,29 +73,3 @@ http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kube
 
 在token处填写上面获取到的token
 
-###
-
-```sh
-cat <<EOF | kubectl apply -f -
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  namespace: kubernetes-dashboard
-  name: kubernetes-dashboard-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
-spec:
-  ingressClassName: nginx-kubernetes-dashboard
-  rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: kubernetes-dashboard
-            port:
-              number: 443
-EOF
-```
