@@ -28,8 +28,7 @@ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/late
 # 添加 --kubelet-insecure-tls 参数
 kubectl patch deploy metrics-server -n kube-system --type='json' -p='[{"op": "add", "path": "/spec/template/spec/containers/0/args/-", "value":"--kubelet-insecure-tls"}]'
 
-kubectl patch node k8s-master02 --type='json' -p='[{"op":"add","path":"/metadata/labels/","my_test":"hello"}]'
-kubectl patch node k8s-master02 --type='json' -p='[{"op":"add","path":"/metadata/labels/app","value":youban}]'
+kubectl patch node k8s-master02 --type='json' -p='[{"op":"add","path":"/metadata/labels/cmd","value":"test"}]'
 
 '[{"op":"add","path":"/metadata/labels/","my_test":"hello"}]'
 # daemon patch
