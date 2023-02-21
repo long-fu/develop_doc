@@ -192,7 +192,7 @@ cp keadm-v1.12.1-linux-arm64/keadm/keadm /usr/local/bin/keadm
 2. 加入
 
 ```sh
-keadm join --cloudcore-ipport=39.108.49.13:10000 --token=b30c983a49c5cb08428cfaf4d579ecdaba82637e62d5b023cc6d0c97bb3a07cc.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzYxMDg4NTB9.TPRlD9r6bGVAIm1dHUMhj-vGYwy89YIS5DmPmcGnQvw --kubeedge-version=v1.12.1
+keadm join --cloudcore-ipport=39.108.49.13:10000 --token=b30c983a49c5cb08428cfaf4d579ecdaba82637e62d5b023cc6d0c97bb3a07cc.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzY1ODQwNTB9.Sp7Zh8BZkz5XvkzO-22lUtpL74OiqPWMtZVcwUN2kPE --kubeedge-version=v1.12.1
 ```
 
 3. 在maskter查看边端是否加入成功
