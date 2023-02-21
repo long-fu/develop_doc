@@ -140,7 +140,7 @@ sudo docker info | grep Docker Root Dir
 
 
 
-
+```sh
 docker cp <containerId>:/file/path/within/container /host/path/target
 
 docker cp ea6477f33e0a:/opt/nvidia/deepstream/deepstream-6.1/samples/configs/deepstream-app/out_source0.mp4 ~
@@ -149,4 +149,23 @@ docker cp ea6477f33e0a:/opt/nvidia/deepstream/deepstream-6.1/samples/configs/dee
 
 [使用 Dockerfile 定制镜像](https://yeasy.gitbook.io/docker_practice/image/build)
 
-kubectl describe pods name -n namespase
+```
+
+## 端口 进程
+
+```sh
+
+netstat -lnp | grep 8001
+
+ps 1777
+
+kill -9 1777   
+
+ssh -L localhost:8001:localhost:8001 -NT root@119.23.226.24
+
+```
+
+
+
+
+
