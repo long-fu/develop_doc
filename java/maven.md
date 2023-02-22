@@ -82,3 +82,8 @@ mvn exec:java -Dexec.mainClass="com.k8s.client.app.App"
 
 Hello World!
 ```
+
+https://repo1.maven.org/maven2
+https://repository.jboss.org/nexus/content/repositories/public/
+
+wanshan
