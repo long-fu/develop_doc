@@ -43,7 +43,6 @@ kubectl apply -f dash-admin-user.yml
 2. 获取token
 
 ```sh
-kubectl -n kubernetes-dashboard create token admin-user
 kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')
 ```
 
