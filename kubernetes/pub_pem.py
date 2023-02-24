@@ -33,7 +33,6 @@ Ky4=
 -----END CERTIFICATE-----
 """
 
-
 def get_pub_key(cert_str):
     x509 =OpenSSL.crypto.load_certificate(OpenSSL.crypto.FILETYPE_PEM,cert_str )
     pubkey=x509.get_pubkey()
@@ -41,7 +40,8 @@ def get_pub_key(cert_str):
     print(pub_str)
     print("-------------------------")
     bt = OpenSSL.crypto.dump_publickey(OpenSSL.crypto.FILETYPE_ASN1, pubkey)
-    print(len(bt),bt)
+    # print(len(bt),bt)
+    print(len(bt))
     encryptor = sha256()
     encryptor.update(bt)  
     hashCode = encryptor.hexdigest()
