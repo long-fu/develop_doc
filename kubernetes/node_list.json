@@ -2231,12 +2231,31 @@
                 }
             ],
             "kind": "NodeList",
-            "metadata": {
-                "remainingItemCount": 1,
-                "resourceVersion": "1106156",
-                "selfLink": null,
-                "continue": "eyJ2IjoibWV0YS5rOHMuaW8vdjEiLCJydiI6MTEwNjE1Niwic3RhcnQiOiJrOHMtd29ya2VyMDJcdTAwMDAifQ"
-            }
+            "itemCount": 1,
+            "resourceVersion": "1106156",
+            "selfLink": null,
+            "continue": "eyJ2IjoibWV0YS5rOHMuaW8vdjEiLCJydiI6MTEwNjE1Niwic3RhcnQiOiJrOHMtd29ya2VyMDJcdTAwMDAifQ"
+ 
         }
     }
+}
+
+{
+    "fieldSelector": "status.conditions.type=Ready"
+}
+
+{
+    
+    listContinue = "eyJ2IjoibWV0YS5rOHMuaW8vdjEiLCJydiI6MTEwNjE1Niwic3RhcnQiOiJrOHMtd29ya2VyMDJcdTAwMDAifQ",
+
+
+    limit = 5
+
+    fieldSelector;
+
+    labelSelector;
+
+    // fieldSelector;
+
+    // labelSelector;
 }
