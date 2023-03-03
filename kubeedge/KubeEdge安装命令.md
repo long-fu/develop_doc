@@ -64,6 +64,8 @@ TOKEN=xxxx
 SERVER=172.31.73.105:10000
 keadm join --token=$TOKEN --cloudcore-ipport=$SERVER --kubeedge-version=1.12.1
 
+keadm join --token=b30c983a49c5cb08428cfaf4d579ecdaba82637e62d5b023cc6d0c97bb3a07cc.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Nzc3OTQ2OTh9.ZZEIveA_HyiUVcHWDkmDOJ6EJxI9s8H2Czp7cr1QOl8 --cloudcore-ipport=39.108.49.13:10000 --kubeedge-version=1.12.1
+
 # 查看 edgecore 日志
 journalctl -u edgecore.service -f
 

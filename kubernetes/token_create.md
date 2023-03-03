@@ -20,3 +20,9 @@ openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outfor
 
 openssl x509 -pubkey -in hello.txt | openssl rsa -pubin -outform der 2>/dev/null | \
    openssl dgst -sha256 -hex | sed 's/^.* //' -->
+
+
+1. 安装docker (版本检测)
+2. k8s环境配置 
+3. 安装k8s三件套 (版本检测)
+4. 运行加入命令 
