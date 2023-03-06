@@ -155,7 +155,7 @@ docker cp ea6477f33e0a:/opt/nvidia/deepstream/deepstream-6.1/samples/configs/dee
 
 ```sh
 
-netstat -lnp | grep 8001
+netstat -lnp | grep 8080
 
 ps 1777
 
