@@ -19,16 +19,6 @@ metadata:
 
 ---
 
-# apiVersion: v1
-# kind: ServiceAccount
-# metadata:
-#   labels:
-#     k8s-app: kubernetes-dashboard
-#   name: kubernetes-dashboard
-#   namespace: kubernetes-dashboard
-
-# ---
-
 kind: Service
 apiVersion: v1
 metadata:
@@ -38,8 +28,8 @@ metadata:
   namespace: t-eio-dashboard
 spec:
   ports:
-    - port: 8086
-      targetPort: 8086
+    - port: 80
+      targetPort: 8060
   selector:
     k8s-app: t-eio-dashboard
   type: NodePort
@@ -70,6 +60,10 @@ spec:
       securityContext:
         seccompProfile:
           type: RuntimeDefault
+      hostAliases:
+        - ip: "120.79.183.159"
+          hostnames:
+          - "k8s-vip"
       containers:
         - name: t-eio-dashboard-manager
           image: t-eio-manager-0.0.1
