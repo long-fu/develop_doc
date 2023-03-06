@@ -19,7 +19,7 @@ cat t-eio-web-0.0.1.tar | docker import - t-eio/ec-manager-web:v0.0.1
 0. 运行容器
 
 ```sh
-docker run -d -P --add-host=k8s-vip:120.79.183.159 t-eio-manager-0.0.1 /bin/bash -ce 'tail -f /dev/null'
+docker run -d -P --add-host=k8s-vip:120.79.183.159 t-eio/ec-manager:v0.0.1
 /bin/bash
 
 docker run -d -p 8080:8080 --add-host=k8s-vip:120.79.183.159 t-eio/ec-manager:v0.0.1 /bin/bash -ce 'tail -f /dev/null'
