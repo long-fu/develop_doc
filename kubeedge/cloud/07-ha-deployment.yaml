@@ -12,7 +12,7 @@ spec:
     matchLabels:
       k8s-app: kubeedge
       kubeedge: cloudcore
-  template:
+  template: # template 描述将要创建的 Pod。
     metadata:
       labels:
         k8s-app: kubeedge
