@@ -97,6 +97,7 @@ kubectl taint nodes --all node-role.kubernetes.io/master-
 
 kubectl describe pod -n kubeedge cloudcore-6c5c6cccd6-jbr89
 
+kubectl describe pod -n t-eio-dashboard t-eio-dashboard-d96dddc88-n6cnd
 
 kubectl delete namespace kubeedge
 
