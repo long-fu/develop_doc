@@ -6,22 +6,23 @@
 
 导出镜像
 
+```sh
+# 导出
+docker export 7691a814370e > ubuntu.tar
+#导入
+cat t-eio-manager-0.0.1.tar | docker import - t-eio/ec-manager:v0.0.1
 
+cat t-eio-web-0.0.1.tar | docker import - t-eio/ec-manager-web:v0.0.1
+
+```
 
 0. 运行容器
 
 ```sh
 docker run -d -P --add-host=k8s-vip:120.79.183.159 t-eio-manager-0.0.1
-
-docker run -d -P --add-host=k8s-vip:120.79.183.159 t-eio/ec-manager:v0.0.1
-
-docker run -d -p 8086:8086 t-eio/ec-manager-web:v0.0.1
+docker run -d -P t-eio-web-0.0.1
 # 进入运行的docker镜像中 并且用sh命令交互
-docker exec -it 86814965730a /bin/bash
-docker exec -it 96729abfdb99 /bin/bash
-
-
-
+docker exec -it b691db2c245f /bin/bash
 ```
 
 1. 删除容器

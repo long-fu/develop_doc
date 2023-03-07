@@ -68,6 +68,8 @@ kubectl get nodes
 kubectl label nodes k8s-worker01 app=cloudcore
 kubectl label nodes k8s-worker02 app=cloudcore
 
+kubectl label nodes k8s-master02 app=t-eio
+
 # 查看标签
 kubectl get node --show-labels
 
