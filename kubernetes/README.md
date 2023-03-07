@@ -114,7 +114,7 @@ kubectl describe svc cloudcore -nkubeedge
 kubectl describe pod -n kubeedge cloudcore-788d7568f7-8xlxl
 kubectl describe pod -n tigera-operator   tigera-operator-cffd8458f-bszw
 kubectl describe pod -n kube-system  coredns-7f6cbbb7b8-nrwns
-
+kubectl describe pod -n t-eio-dashboard  t-eio-dashboard-6c48c74df6-jslrt
 
 kubectl describe svc cloudcore -nkubeedge
 
