@@ -83,14 +83,9 @@ kubectl label node k8s-work app-
 # 删除pod
 kubectl delete pod -n kubeedge cloudcore-5c78765666-7c6gd
 
-kubectl delete pod -n kubeedge cloudcore-6c5c6cccd6-82z2z
-kubectl delete pod -n kubeedge cloudcore-6c5c6cccd6-x8cv5
-
 kubectl delete pod -n kube-system kube-flannel-ds-cd2s9
-kubectl delete pod -n kube-system kube-flannel-ds-hvbpf
-kubectl delete pod -n kube-system kube-flannel-ds-qfz5b
-kubectl delete pod -n kube-system kube-flannel-ds-tgbst
-kubectl delete pod -n kube-system coredns-7f6cbbb7b8-nrwns
+
+
 kubectl delete pod -n kube-system coredns-7f6cbbb7b8-nrwns
 # 查看节点状态
 kubectl describe node kubeedge
@@ -111,7 +106,7 @@ kubectl get svc -nkubeedge
 
 kubectl describe svc cloudcore -nkubeedge
 
-kubectl describe pod -n kubeedge cloudcore-788d7568f7-8xlxl
+kubectl describe pod -n kubernetes-dashboard kubernetes-dashboard-7ff554647d-5wf7q
 kubectl describe pod -n tigera-operator   tigera-operator-cffd8458f-bszw
 kubectl describe pod -n kube-system  coredns-7f6cbbb7b8-nrwns
 kubectl describe pod -n t-eio-dashboard  t-eio-dashboard-6c48c74df6-jslrt
@@ -123,8 +118,6 @@ service edgecore status
 journalctl -u edgecore.service -xe
 
 journalctl -u edgecore.service -f
-
-
 
 kubectl describe pod -n kubeedge cloudcore-788d7568f7-8xlxl
 

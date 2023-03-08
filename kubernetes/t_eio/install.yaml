@@ -54,11 +54,9 @@ spec:
           ports:
             - containerPort: 8080
               protocol: TCP
-          command: ["/bin/bash","-ce","tail -f /dev/null"]
         - name: t-eio-dashboard-web
           image: t-eio/ec-manager-web:v0.0.1
           imagePullPolicy: Never
           ports:
             - containerPort: 80
               protocol: TCP
-          command: ["/bin/bash","-ce","tail -f /dev/null"]
