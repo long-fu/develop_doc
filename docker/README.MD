@@ -23,7 +23,6 @@ docker run -d -P --add-host=k8s-vip:120.79.183.159 ec-manager-0.0.1
 
 docker run -d -P --add-host=k8s-vip:120.79.183.159 t-eio-manager-0.0.1
 
-
 docker run -d -P t-eio-web-0.0.1
 # 进入运行的docker镜像中 并且用sh命令交互
 docker exec -it b2f73d901244 /bin/bash
@@ -120,5 +119,5 @@ kubectl delete deployment t-eio-dashboard -nt-eio-dashboard
 
 kubectl apply -f install.yaml
 
-kubectl exec -it -nt-eio-dashboard t-eio-dashboard-5b5fd996f4-2xc9w --container t-eio-dashboard /bin/bash
+kubectl exec -it -nt-eio-dashboard t-eio-dashboard-5b5fd996f4-8dhhh --container t-eio-dashboard /bin/bash
 ```
