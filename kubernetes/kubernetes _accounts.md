@@ -7,7 +7,7 @@
 - [准入控制器参考](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/admission-controllers/)
 - [Kubernetes（k8s）权限管理RBAC详解](https://www.cnblogs.com/liugp/p/16438284.html)
 - [浅聊Kubernetes的各种认证策略以及适用场景](https://blog.csdn.net/M2l0ZgSsVc7r69eFdTj/article/details/104112140)
-- [彻底搞懂 Kubernetes 中的认证](https://cloudnative.to/blog/authentication-k8s/)
+- [深入理解k8s中的访问控制（认证、鉴权、审计）流程](https://www.cnblogs.com/yangyuliufeng/p/13548915.html)
 - [为 Kubernetes 搭建支持 OpenId Connect 的身份认证系统](https://github.com/labulakalia/ibm_bak/blob/main/ibm_articles/%E4%B8%BAKubernetes%E6%90%AD%E5%BB%BA%E6%94%AF%E6%8C%81OpenIdConnect%E7%9A%84%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E7%B3%BB%E7%BB%9F.md)
 
 1. Authentication（认证）
@@ -52,10 +52,7 @@
 Adminssion Control实际上是一个准入控制器插件列表，发送到API Server 的 请求都需要经过这个列表中的每个准入控制器插件的检查，检查不通过， 则拒绝请求。
 现成的插件，比如psp,imagewebhook这些都是已经存在的插件，如果需要使用，可以启用该准入控制插件。 
 
-
 --------------
-
-
 
 1. 创建一个账户
 
