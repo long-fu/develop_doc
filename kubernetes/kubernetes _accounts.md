@@ -58,6 +58,4 @@ Adminssion Control实际上是一个准入控制器插件列表，发送到API S
 
 2. 给账户分配访问权限
 
-使用 ABAC 鉴权
-
-基于属性的访问控制（Attribute-based access control - ABAC）定义了访问控制范例， 其中通过使用将属性组合在一起的策略来向用户授予访问权限。
+- 使用RBAC配置资料就好
