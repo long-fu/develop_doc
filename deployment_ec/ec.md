@@ -35,13 +35,14 @@ apt install npm
 
 ![4](images/4.png)
 
-2. 按照web vue依赖
+2. 安装web vue依赖
 
 ```sh
 npm i
 ```
 ![5](images/5.png)
 ![5](images/6.png)
+
 3. 执行vue打包
 
 ```sh
@@ -132,7 +133,7 @@ spec:
         k8s-app: ec-dashboard
     spec:
       nodeSelector: # node标签选择 
-        ec-app: dashboard # 按照到包含ec-app=dashboard标签的node上
+        ec-app: dashboard # 安装到包含ec-app=dashboard标签的node上
       hostAliases: # pod hosts文件配置
         - ip: "120.79.183.159"
           hostnames:
