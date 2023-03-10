@@ -1,6 +1,5 @@
 # Kubernetes 中的用户 
 
-
 - [用户认证](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/authentication/#openid-connect-tokens)
 - [使用 RBAC 鉴权](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/rbac/)
 - [鉴权概述](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/authorization/)
@@ -59,3 +58,51 @@ Adminssion Control实际上是一个准入控制器插件列表，发送到API S
 2. 给账户分配访问权限
 
 - 使用RBAC配置资料就好
+
+
+------------------
+
+
+```sh
+
+kubectl config get-contexts
+
+kubectl config use-context devuser@kubernetes
+
+kubectl config use-context kubernetes-admin@kubernetes
+
+kubectl get sa -A
+
+kubectl get sa -nkubernetes-dashboard default -oyaml
+
+kubectl get secret -nkubernetes-dashboard default-token-5g244 -o jsonpath={.data.token}|base64 -d
+
+kubectl get sa -nkubernetes-dashboard admin-user -oyaml
+
+kubectl get secret -nkubernetes-dashboard admin-user-token-c5xvx -o jsonpath={.data.token}|base64 -d
+
+kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')
+
+kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep kubernetes-dashboard | awk '{print $1}')
+
+kubectl -n default describe secret $(kubectl -n default get secret | grep name-spa | awk '{print $1}')
+
+
+kubectl get sa -nec-dashboard my-view -oyaml
+
+kubectl get secret -nec-dashboard my-view-token-v2spk -o jsonpath={.data.token}|base64 -d
+
+
+
+```
+
+## 设计方案
+
+**ServiceAccount**
+
+指定 ServiceAccount 所有 namesapce ==> ClusterRoleBinding ClusterRole
+
+指定 ServiceAccount 单个 namesapce ==> RoleBinding Role 查询API的时候只能指定namespace
+
+
+
