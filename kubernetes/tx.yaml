@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: nvidia-l4t-base
+spec: 
+  restartPolicy: OnFailure 
+  containers: 
+  - name: nvidia-l4t-base 
+    image: "nvcr.io/nvidia/l4t-base:r32.4.2" 
+    args: 
+    - /usr/local/cuda/samples/1_Utilities/deviceQuery/deviceQuery
