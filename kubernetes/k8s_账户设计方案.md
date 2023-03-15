@@ -34,6 +34,13 @@ namesapce 给每个银行分配一个
 
 指定 ServiceAccount 单个 namesapce ==> RoleBinding Role 可以获取集群内是[namesapce]的规则数据。测试的请求需要指定[namesapce]。不然他不会返回 [namesapce]下的资源。
 
+1. 基于namespace :  创建namespace | 选择namespace ==> 创建账户  | 选择账户 （多个账户） ==>  创建 | 选择 role ==> 选择 | 创建 roleBinding :ClusterRoleBinding == 完成
+
+2. 所有namespace :  创建namespace | 选择namespace ==> 创建账户  | 选择账户 （多个账户） ==》 创建 | 选择 Clusterrole ==> 选择 | 创建 ClusterRoleBinding == 完成
+
+
+
+
 **常用操作命令**
 
 ```sh
