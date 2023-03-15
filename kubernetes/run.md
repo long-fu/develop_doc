@@ -134,7 +134,13 @@ kubectl exec -it -nkubeedge cloudcore-7cc784f4d7-kk7q9 /bin/bash
 
 kubectl exec -it -nt-eio-dashboard t-eio-dashboard-5b5fd996f4-8dhhh --container t-eio-dashboard-web  /bin/bash
 
+kubectl exec -it -ndefault hs-yolov5-deployment-dc758bbbd-pmtm6 --container t-eio-dashboard-web  /bin/bash
+
+kubectl exec -it -ndefault hs-yolov5-deployment-dc758bbbd-pmtm6 
+
 kubectl describe pod -n kubernetes-dashboard kubernetes-dashboard-7ff554647d-rk4xv
+
+kubectl describe pod -n default nx-yolov5-deployment-54775b4dc5-p277x
 
 kubectl describe pod -n kubeedge cloudcore-6c5c6cccd6-vvskv
 
