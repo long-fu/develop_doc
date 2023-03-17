@@ -1,36 +1,13 @@
-# 角色管理
 
-namesapce 给每个银行分配一个
-
-
-## 访问所有namesapce资源 root  
-
-> 通过 ServiceAccount ClusterRoleBinding ClusterRole 绑定 来实现
-
-- 运维 可以查看那些资源
-
-- 运营 可以查看 操作那些资源
-
-## 访问但个namesapce资源 
-
-> 通过 ServiceAccount RoleBinding Role 绑定 来实现
-
-- 运维 可以查看那些资源
-
-- 运营 可以查看 操作那些资源
-
-
---------------------
+# APP K8S RBAC
 
 - [Kubernetes（k8s）权限管理RBAC详解 ](https://www.cnblogs.com/liugp/p/16438284.html)
 
 - [使用 RBAC 鉴权](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/rbac/)
 
-- [为 Pod 配置服务账号](https://kubernetes.io/zh-cn/docs/tasks/configure-pod-container/configure-service-account/)
-
-- [通过配置内置准入控制器实施 Pod 安全标准](https://kubernetes.io/zh-cn/docs/tasks/configure-pod-container/enforce-standards-admission-controller/)
-
 --------
+
+1. 验证不同namespace下资源的访问情况
 
 **ServiceAccount**
 
@@ -120,19 +97,58 @@ kubectl get secret -nec-dashboard my-view-token-v2spk -o jsonpath={.data.token}|
 
 --- 
 
-1、Role、ClsuterRole Verbs可配置参数
+1、Role、ClsuterRole Verbs 可配置参数
 
 "get", "list", "watch", "create", "update", "patch", "delete", "exec"
 
-2、Role、ClsuterRole Resource可配置参数
+2、Role、ClsuterRole Resource 可配置参数
 
 "services", "endpoints", "pods","secrets","configmaps","crontabs","deployments","jobs","nodes","rolebindings","clusterroles","daemonsets","replicasets","statefulsets","horizontalpodautoscalers","replicationcontrollers","cronjobs"
 
-3、Role、ClsuterRole APIGroup可配置参数
+3、Role、ClsuterRole APIGroup 可配置参数
 
 "","apps", "autoscaling", "batch"
 
+{
+  "apiGroup": ""
+  "resource": ["componentstatuses","configmaps","endpoints",
+  "events","limitranges","namespaces",
+  "nodes","persistentvolumeclaims",
+  "persistentvolumes","pods","podtemplates","replicationcontrollers","resourcequotas","secrets","serviceaccounts","services"]
+}
 
+{
+  "apiGroup": "apps"
+  "resource": ["controllerrevisions","daemonsets","deployments",
+  "replicasets","statefulsets"]
+}
+
+{
+  
+  "apiGroup": "rbac.authorization.k8s.io"
+    "resource": ["clusterrolebindings","clusterroles","rolebindings","roles"]
+}
+
+[create delete deletecollection get list patch update watch]
+
+
+kubectl api-resources -o wide
+
+kubectl api-resources --api-group "" -o wide
+
+kubectl api-resources --api-group apps -o wide
+
+kubectl api-resources --api-group extensions -o wide
+
+
+kubectl api-resources --api-group rbac -o wide
+
+kubectl api-resources --api-group autoscaling -o wide
+
+kubectl api-resources --api-group rbac.authorization.k8s.io -o wide
+
+
+kubectl api-resources --api-group batch -o wide
 ---------------
 
 

@@ -58,6 +58,7 @@ rules:
 
 1. 完全新建: 创建账户 | 选择多个账户 ===> 选择已有角色规则 | 创建角色规则(Role | ClusterRole) ===> 进行规则的绑定(RoleBinding | ClusterRoleBinding`只能绑定ClusterRole`)
 
-
+1. 為單個ns創建管理
+2. 為所有的ns
 
 
