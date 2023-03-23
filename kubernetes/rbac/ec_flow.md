@@ -40,14 +40,14 @@
 
 ### 命名空间(ns)管理页面
 
-- 列表ns: /api/namespace/getNamespaceList
-- 删除ns: /api/namespace/deleteNamespace
+- 列表ns: /api/namespace/list
+- 删除ns: /api/namespace/delete
   - 提示: 删除ns会删除ns下所有资源数据
 - 创建ns
 
 ### 创建命名空间(ns)页面
 
-- 创建ns: /api/namespace/getNamespaceList
+- 创建ns: /api/namespace/create
 
 ## Role
 
