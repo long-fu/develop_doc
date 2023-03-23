@@ -1,0 +1,63 @@
+apiVersion: rbac.authorization.k8s.io/v1
+# 此角色绑定使得用户 "dave" 能够读取 "development" 名字空间中的 Secrets
+# 你需要一个名为 "secret-reader" 的 ClusterRole
+kind: RoleBinding
+metadata:
+  name: read-secrets
+  # RoleBinding 的名字空间决定了访问权限的授予范围。
+  # 这里隐含授权仅在 "development" 名字空间内的访问权限。
+  namespace: development
+subjects:
+- kind: User
+  name: dave # 'name' 是区分大小写的
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: secret-reader
+  apiGroup: rbac.authorization.k8s.io
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: pod-reader
+rules:
+- apiGroups: [""] # "" 标明 core API 组
+  resources: ["secrets","serviceaccounts"]
+  resourceNames: []
+  verbs: ["get", "list"]
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: ec-admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: ec-admin
+  namespace: ec-account
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: ec-admin-2
+  namespace: sdas
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: cluste1111
+subjects:
+- kind: ServiceAccount
+  name: ec-admin-12
+  namespace: ec-account
+
+
