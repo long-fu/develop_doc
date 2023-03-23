@@ -71,6 +71,8 @@ kubectl get svc -nkubeedge
 
 kubectl describe svc cloudcore -nkubeedge
 
+kubectl describe pod -n ingress-nginx ingress-nginx-controller-68bb5b67f5-7ns75
+kubectl describe pod -n ingress-nginx ingress-nginx-admission-create-2lsqs
 kubectl describe pod -n kubernetes-dashboard kubernetes-dashboard-7ff554647d-5wf7q
 kubectl describe pod -n tigera-operator   tigera-operator-cffd8458f-bszw
 kubectl describe pod -n kube-system  coredns-7f6cbbb7b8-nrwns
