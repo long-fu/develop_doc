@@ -25,6 +25,7 @@
 - 创建sa
 - 删除sa: /api/account/delete
 - 更新sa
+- 重置密码: /api/account/resetPassword
 
 ### 创建账户(sa)页面
 
