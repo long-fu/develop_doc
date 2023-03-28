@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ec-dashboard
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    k8s-app: ec-dashboard
+  name: ec-dashboard
+  namespace: ec-dashboard
+spec:
+  ports:
+    - port: 8086
+      targetPort: 8086
+  selector:
+    k8s-app: ec-dashboard
+  type: NodePort
+  externalIPs: # 目标节点公网IP
+    - 119.23.231.199
+
+---
+
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  labels:
+    k8s-app: ec-dashboard
+  name: ec-dashboard
+  namespace: ec-dashboard
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      k8s-app: ec-dashboard
+  template:
+    metadata:
+      labels:
+        k8s-app: ec-dashboard
+    spec:
+      nodeSelector: # node标签选择 
+        ec-app: dashboard # 安装到包含ec-app=dashboard标签的node上
+      hostAliases: # pod hosts文件配置
+        - ip: "120.79.183.159"
+          hostnames:
+            - "k8s-vip"
+      containers:
+        - name: ec-dashboard-manager
+          image: ec-manager-0.0.1:latest
+          imagePullPolicy: Never # 直接从本地启动镜像
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+        - name: ec-dashboard-web
+          image: ec-manager-web:v0.0.1
+          imagePullPolicy: Never # 直接从本地启动镜像
+          ports:
+            - containerPort: 8086
+              protocol: TCP
