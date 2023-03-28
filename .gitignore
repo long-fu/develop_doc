@@ -3,8 +3,4 @@ ec-manager-web.tar
 ec-manager.tar
 __pycache__
 .pdf
-
-{"code":0,"message":"成功","data":{
-"kubernetsToken":"kubeadm join https://k8s-vip:6443 --discovery-token 6z8pdh.d3itgd4cf6c9fqmb --discovery-token-ca-cert-hash sha256:68c86fb38f047d680175e161496a4d832d433079e127076ae1971d1aff9d9657",
-"kubeedgeToken":"keadm join --token\u003d1782dc224dd0dafe8df7b96296d97e3c6987ad3ef1a3d11881c153bfc67074b7.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzkxMjc0NzF9.Db0P7RjZ1SGzh1D6skWd2rvIqWAUFtd8S_3AxXG1Wg8 --cloudcore-ipport\u003d39.108.49.13:10000 --kubeedge-version\u003dv1.12.1",
-"kubernetsVersion":"v1.22.17","kubeedgeVersion":"v1.12.1"}}
+.vscode
