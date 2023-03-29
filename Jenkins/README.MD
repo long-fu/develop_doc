@@ -9,11 +9,11 @@ docker search jenkins
 
 docker pull jenkins/jenkins:lts
 
-mkdir -p /home/jenkins/workspace
+mkdir -p /Users/jenkins/workspace
 
 
 docker run -uroot -d --restart=always -p 9001:8080 \
- -v /home/jenkins/workspace/:/var/jenkins_home/workspace \
+ -v /Users/jenkins/workspace/:/var/jenkins_home/workspace \
  -v /var/run/docker.sock:/var/run/docker.sock \
  --name jenkins jenkins/jenkins:lts
 

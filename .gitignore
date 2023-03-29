@@ -4,3 +4,4 @@ ec-manager.tar
 __pycache__
 .pdf
 .vscode
+.DS_Store
