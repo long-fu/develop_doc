@@ -157,6 +157,8 @@ docker cp ea6477f33e0a:/opt/nvidia/deepstream/deepstream-6.1/samples/configs/dee
 
 netstat -lnp | grep 8080
 
+lsof -i tcp:8080
+
 ps 1777
 
 kill -9 1777   
