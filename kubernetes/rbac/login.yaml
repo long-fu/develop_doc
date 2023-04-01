@@ -28,7 +28,14 @@ rules:
   resources: ["secrets","serviceaccounts"]
   resourceNames: []
   verbs: ["get", "list"]
-
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: ec-admin
+  namespace: ec-account
 ---
 
 apiVersion: rbac.authorization.k8s.io/v1
@@ -47,17 +54,18 @@ subjects:
 ---
 
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
+kind: RoleBinding 
 metadata:
-  name: ec-admin-2
-  namespace: sdas
-roleRef: # 选择角色 或者 集群角色
+  name: ec-admin-2 # 手动输入
+  namespace: sdas # 选择
+roleRef: # 选择角色[同一个ns] 或者 集群角色
   apiGroup: rbac.authorization.k8s.io
-  kind: Role
+  kind: CloureRole || Role
   name: cluste1111
-subjects: # 选择账户
+subjects: # 选择账户 多选
 - kind: ServiceAccount
   name: ec-admin-12
   namespace: ec-account
-
-
+- kind: ServiceAccount
+  name: 
+  namespace: 
