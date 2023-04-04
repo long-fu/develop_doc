@@ -233,11 +233,10 @@ spec:
       serviceAccountName: kubernetes-dashboard
       nodeSelector:
         "kubernetes.io/os": linux
-        app: dashboard
       # Comment the following tolerations if Dashboard must not be deployed on master
-      tolerations:
-        - key: node-role.kubernetes.io/master
-          effect: NoSchedule
+      # tolerations:
+      #   - key: node-role.kubernetes.io/master
+      #     effect: NoSchedule
 
 ---
 
@@ -304,9 +303,9 @@ spec:
         "kubernetes.io/os": linux
       # Comment the following tolerations if Dashboard must not be deployed on master
       # 如果 Dashboard 不得部署在 master 上，请注释以下容忍度
-      tolerations:
-        - key: node-role.kubernetes.io/master
-          effect: NoSchedule
+      # tolerations:
+      #   - key: node-role.kubernetes.io/master
+      #     effect: NoSchedule
       volumes:
         - name: tmp-volume
           emptyDir: {}
