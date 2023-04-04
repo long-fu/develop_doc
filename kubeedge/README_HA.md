@@ -66,6 +66,9 @@ kubectl get nodes
 
 # kubectl label nodes [nodename] [key]=[value]  # label the nodes where the cloudcore will run
 kubectl label nodes k8s-worker01 app=cloudcore
+
+kubectl label nodes k8s-work k8s-app=cloudcore
+
 kubectl label nodes k8s-worker02 app=cloudcore
 
 kubectl label nodes k8s-master02 app=t-eio
