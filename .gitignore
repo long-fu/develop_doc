@@ -5,3 +5,4 @@ __pycache__
 .pdf
 .vscode
 .DS_Store
+*.pdf
