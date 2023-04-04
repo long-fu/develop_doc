@@ -155,11 +155,11 @@ docker cp ea6477f33e0a:/opt/nvidia/deepstream/deepstream-6.1/samples/configs/dee
 
 ```sh
 
-netstat -lnp | grep 8080
+netstat -lnp | grep 1883
 
-ps 1777
+ps 9612
 
-kill -9 1777   
+kill -9 9555   
 
 ssh -L localhost:8001:localhost:8001 -NT root@119.23.226.24
 

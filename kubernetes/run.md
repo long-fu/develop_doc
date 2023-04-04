@@ -77,7 +77,7 @@ kubectl describe pod -n kubernetes-dashboard kubernetes-dashboard-7ff554647d-5wf
 kubectl describe pod -n tigera-operator   tigera-operator-cffd8458f-bszw
 kubectl describe pod -n kube-system  coredns-7f6cbbb7b8-nrwns
 kubectl describe pod -n t-eio-dashboard  t-eio-dashboard-6c48c74df6-jslrt
-
+kubectl describe pod -n kube-system  kube-apiserver-k8s-master1
 kubectl describe svc cloudcore -nkubeedge
 
 service edgecore status

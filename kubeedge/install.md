@@ -20,7 +20,8 @@ tar zxvf keadm-v1.12.1-linux-amd64.tar.gz
 chmod +x keadm-v1.12.1-linux-amd64/keadm/keadm
 mv keadm-v1.12.1-linux-amd64/keadm/keadm /usr/local/bin
 
-keadm init --advertise-address=172.31.73.105 --set iptablesManager.mode="external" --profile version=v1.12.1
+keadm init --advertise-address=119.23.226.24 --set iptablesManager.mode="external" --profile version=v1.12.1
+
 kubectl get pod -n kubeedge
 
 # 安装metrics-server
@@ -58,7 +59,7 @@ sudo sysctl -p | grep ip_forward
 
 # 安装边缘节点
 TOKEN=xxxx
-SERVER=172.31.73.105:10000
+SERVER=119.23.226.24:10000
 keadm join --token=$TOKEN --cloudcore-ipport=$SERVER --kubeedge-version=1.12.1
 
 # 查看 edgecore 日志
