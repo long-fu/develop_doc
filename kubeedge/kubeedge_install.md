@@ -272,10 +272,12 @@ keadm init --advertise-address=172.22.197.126 --profile version=v1.12.1 --kube-c
 kubectl get nodes
 
 # 查看污点
-kubectl describe nodes izwz94t9xain7tmum4mmvmz  | grep Taints
+kubectl describe nodes k8s-worker02  | grep Taints
 
 # 污点删除
 kubectl taint node izwz94t9xain7tmum4mmvmz node-role.kubernetes.io/master-
+
+kubectl taint node k8s-worker02 node-role.kubernetes.io/master-
 
 # 再次查看
 kubectl describe nodes izwz94t9xain7tmum4mmvmz  | grep Taints

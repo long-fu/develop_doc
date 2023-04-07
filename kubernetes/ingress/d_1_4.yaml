@@ -451,7 +451,7 @@ spec:
               fieldPath: metadata.namespace
         - name: LD_PRELOAD
           value: /usr/local/lib/libmimalloc.so
-        image: registry.cn-hangzhou.aliyuncs.com/google_containers/nginx-ingress-controller@sha256:34ee929b111ffc7aa426ffd409af44da48e5a0eea1eb2207994d9e0c0882d143
+        image: registry.cn-hangzhou.aliyuncs.com/google_containers/nginx-ingress-controller:v1.4.0@sha256:34ee929b111ffc7aa426ffd409af44da48e5a0eea1eb2207994d9e0c0882d143
         imagePullPolicy: IfNotPresent
         lifecycle:
           preStop:
@@ -506,7 +506,6 @@ spec:
           name: webhook-cert
           readOnly: true
       dnsPolicy: ClusterFirst
-      # nodeName: k8s-master03
       nodeSelector:
         kubernetes.io/os: linux
       serviceAccountName: ingress-nginx
@@ -554,7 +553,6 @@ spec:
         name: create
         securityContext:
           allowPrivilegeEscalation: false
-      # nodeName: k8s-master03
       nodeSelector:
         kubernetes.io/os: linux
       restartPolicy: OnFailure
@@ -604,7 +602,6 @@ spec:
         name: patch
         securityContext:
           allowPrivilegeEscalation: false
-      # nodeName: k8s-master03
       nodeSelector:
         kubernetes.io/os: linux
       restartPolicy: OnFailure
