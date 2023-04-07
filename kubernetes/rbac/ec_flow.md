@@ -57,12 +57,17 @@
 - 删除Role: /api/rbac/deleteRole
   - 提示: 删除Role会导致账户访问权限有所变化，请注意检查RoleBinding资源是否存在关联。
 - 创建Role
+- 更新Role
 - 查看Role
 
 ### 创建Role页面
 
 - 获取配置ClusterRole: /api/rbac/getRoleConfig
 - 创建Role: /api/rbac/createRole
+
+### 更新Role页面
+
+- 更新Role: /api/rbac/updateRole
 
 ### Role详情页面
 
@@ -76,12 +81,17 @@
 - 删除ClusterRole: /api/rbac/deleteClusterRole
   - 提示: 删除ClusterRole会导致账户访问权限有所变化，请注意检查RoleBinding和ClusterRoleBinding资源是否存在关联。
 - 创建ClusterRole
+- 更新ClusterRole
 - 查看ClusterRole
 
 ### 创建ClusterRole页面
 
 - 获取配置ClusterRole: /api/rbac/getRoleConfig
 - 创建ClusterRole: /api/rbac/createClusterRole
+
+### 更新ClusterRole页面
+
+- 更新ClusterRole: /api/rbac/updateClusterRole
 
 ### ClusterRole详情页面
 
