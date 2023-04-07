@@ -37,6 +37,7 @@ kubectl delete namespace kubeedge  --force --grace-period=0
 kubectl label node  [node name] [label key=vaalue]
 
 kubectl label node  k8s-master02 app=dashboard
+kubectl label node  k8s-work ec-app=ec-dashboard
 
 kubectl label node  k8s-master03 app=dashboard-1
 
@@ -140,6 +141,12 @@ kubectl exec -it -ndefault hs-yolov5-deployment-dc758bbbd-pmtm6 --container t-ei
 
 kubectl exec -it -ndefault hs-yolov5-deployment-dc758bbbd-pmtm6 
 
+kubectl exec -it -nec-dashboard ec-dashboard-6dfcb4f476-s78lz --container ec-dashboard-manager  /bin/bash
+
+kubectl exec -it -nec-dashboard ec-dashboard-64f5cd4697-ntfkj --container ec-dashboard-manager  /bin/bash
+
+kubectl describe pod -n ec-dashboard ec-dashboard-6dfcb4f476-s78lz
+
 kubectl describe pod -n kubernetes-dashboard kubernetes-dashboard-7ff554647d-rk4xv
 
 kubectl describe pod -n default nx-yolov5-deployment-54775b4dc5-p277x
@@ -149,6 +156,9 @@ kubectl describe pod -n kubeedge cloudcore-6c5c6cccd6-vvskv
 kubectl describe pod -n kubeedge cloudcore-6c5c6cccd6-bwqvb
 
 kubectl logs -n kubeedge cloudcore-6c5c6cccd6-vvskv -p
+
+kubectl logs -n kubeedge cloudcore-6c5c6cccd6-vvskv -p
+
 kubectl label node  k8s-master03 my-app=dashboard
 
 kubectl get node --show-labels
