@@ -174,6 +174,19 @@ docker login hub.ec.com
 
 docker push hub.ec.com/test/ec-manager:v0.0.1
 ```
+
+## 登陆失败 要拷贝ca证书 也就是开始的验证证书 拷贝到响应的目录
+
+```sh
+
+scp harborhost:/harbor/cert/path/ca.crt /usr/local/share/ca-certificate/ca.crt
+sudo update-ca-certificates
+sudo systemctl restart docker.service
+
+
+https://blog.csdn.net/nklinsirui/article/details/87952312
+```
+
 **参考链接**
 
 - [github](https://github.com/goharbor/harbor)
