@@ -63,6 +63,8 @@ bash docker_build.sh
 
 ```sh
 docker save ec-manager-web:v0.0.1 > ec-manager-web.tar
+
+docker save 119.23.231.199:80/test/ec-manager > ec-manager-web.tar
 ```
 
 

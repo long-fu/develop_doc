@@ -172,6 +172,9 @@ ssh -L localhost:8001:localhost:8001 -NT root@119.23.226.24
 ```
 
 
+sudo scp -r root@119.23.231.199:/etc/docker/certs.d .
+
+
 
 
 

@@ -166,13 +166,25 @@ https://119.23.231.199/
 
 ```sh
 ## 测试
-docker tag ec-manager-0.0.1:latest hub.ec.com/test/ec-manager:v0.0.1
+docker tag ec-manager-0.0.1:latest 119.23.231.199:80/test/ec-manager:v0.0.2
+
+docker tag ec-manager-web:v0.0.1 119.23.231.199:80/test/ec-manager-web:v0.0.2
+docker tag ec-manager-web:v0.0.1 119.23.231.199:80/test/ec-manager-web:v0.0.2
 
 docker images
 
-docker login hub.ec.com
+cp certs/domain.crt /usr/local/share/ca-certificates/myregistrydomain.com.crt
+update-ca-certificates
 
-docker push hub.ec.com/test/ec-manager:v0.0.1
+docker -D login hub.ec.com
+
+
+docker -D login 119.23.231.199:80 -u admin -p Harbor12345
+
+
+docker push 119.23.231.199:80/test/ec-manager-web:v0.0.2
+
+docker push hub.ec.com/test/ec-manager-web:v0.0.2
 ```
 **参考链接**
 
