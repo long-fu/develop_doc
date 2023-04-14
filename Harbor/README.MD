@@ -148,7 +148,7 @@ Creating nginx             ... done
 
 docker-compose stop  # 停止
 docker-compose start  # 启动(第一次需要使用 up -d)
-docker-compose down # 停止并删除容器（慎用）
+docker-compose down -v # 停止并删除容器（慎用）
 docker-compose up -d # 创建并启动
 
 
@@ -168,8 +168,15 @@ https://119.23.231.199/
 ## 测试
 docker tag ec-manager-0.0.1:latest 119.23.231.199:80/test/ec-manager:v0.0.2
 
+docker tag hub.docker.haoshuai.com/test/ec-manager:v0.0.3 119.23.231.199/test/ec-manager:v0.0.3
+
 docker tag ec-manager-web:v0.0.1 119.23.231.199:80/test/ec-manager-web:v0.0.2
-docker tag ec-manager-web:v0.0.1 119.23.231.199:80/test/ec-manager-web:v0.0.2
+
+docker tag ec-manager-web:v0.0.1 119.23.231.199/test/ec-manager-web:v0.0.4
+
+docker tag ec-manager-0.0.1:latest 119.23.231.199/test/ec-manager:v0.0.4.1
+
+docker tag 119.23.231.199:80/test/ec-manager:v0.0.2 119.23.231.199/test/ec-manager-web:v0.0.2
 
 docker images
 
@@ -180,7 +187,6 @@ docker -D login hub.ec.com
 
 
 docker -D login 119.23.231.199:80 -u admin -p Harbor12345
-
 
 docker push 119.23.231.199:80/test/ec-manager-web:v0.0.2
 

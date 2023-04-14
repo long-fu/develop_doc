@@ -26,7 +26,7 @@ subjectAltName = @alt_names
 [alt_names]
 DNS.1=hub.docker.haoshuai.com
 DNS.2=hub.docker.haoshuai
-DNS.3=hostname
+DNS.3=docker.haoshuai
 EOF
 
 openssl x509 -req -sha512 -days 3650 \
@@ -47,7 +47,7 @@ cp hub.docker.haoshuai.com.key /etc/docker/certs.d/hub.docker.haoshuai.com/
 cp ca.crt /etc/docker/certs.d/hub.docker.haoshuai.com/
 
 
-docker tag hello-springboot:latest hub.docker.haoshuai.com/test/hello-springboot:v0.0.1
+docker tag ec-manager-web:v0.0.1 hub.docker.haoshuai.com/test/ec-manager-web:v0.0.1
 
 docker images
 

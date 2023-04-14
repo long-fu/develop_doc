@@ -157,13 +157,11 @@ docker cp ea6477f33e0a:/opt/nvidia/deepstream/deepstream-6.1/samples/configs/dee
 
 netstat -lnp | grep 1883
 
-<<<<<<< HEAD
 ps 9612
-=======
+
 lsof -i tcp:8080
 
 ps 1777
->>>>>>> 60df48b8ad04f97f033a8a292038c4ca6c6b079a
 
 kill -9 9555   
 
@@ -171,10 +169,34 @@ ssh -L localhost:8001:localhost:8001 -NT root@119.23.226.24
 
 ```
 
+## ssh文件拷贝
 
+```sh
 sudo scp -r root@119.23.231.199:/etc/docker/certs.d .
+```
 
+## centos防火墙
 
+```sh
+systemctl status firewalld           查看防火墙状态
+systemctl start firewalld            开启防火墙
+systemctl stop firewalld             关闭防火墙
+firewall-cmd --permanent --zone=public --add-port=27017/tcp --permanent    开启指定端口
+firewall-cmd --zone=public --remove-port=27017/tcp --permanent   关闭指定端口
+firewall-cmd --permanent --zone=public --add-port=27017-30000/tcp --permanent  开启指定范围端口
+firewall-cmd --permanent --zone=public --add-port=1-65535/tcp --permanent 开始所有端口
+firewall-cmd --zone=public --remove-port=27017-30000/tcp --permanent   关闭指定范围端口
+firewall-cmd --permanent --query-port=27017/tcp    查看端口是否开放
+firewall-cmd --reload    重启防火墙
+firewall-cmd --list-ports   查看已经开放的端口
+iptables -L -n    查看规则，这个命令是和iptables的相同的
+man firewall-cmd    查看帮助
 
+firewall-cmd --permanent --zone=public --add-port=22/tcp --permanent 
+firewall-cmd --permanent --zone=public --add-port=2376/tcp --permanent
+firewall-cmd --permanent --zone=public --add-port=80/tcp --permanent 
+firewall-cmd --permanent --zone=public --add-port=443/tcp --permanent 
+firewall-cmd --permanent --zone=public --add-port=2376/tcp --permanent 
+```
 
 
