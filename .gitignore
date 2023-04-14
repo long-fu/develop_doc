@@ -7,3 +7,4 @@ __pycache__
 .DS_Store
 *.pdf
 Harbor/harbor
+harbor-offline-installer-v2.7.1.tgz
