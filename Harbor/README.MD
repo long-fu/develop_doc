@@ -170,7 +170,7 @@ docker tag ec-manager-0.0.1:latest 119.23.231.199:80/test/ec-manager:v0.0.2
 
 docker tag hub.docker.haoshuai.com/test/ec-manager:v0.0.3 119.23.231.199/test/ec-manager:v0.0.3
 
-docker tag ec-manager-web:v0.0.1 119.23.231.199:80/test/ec-manager-web:v0.0.2
+docker tag 119.23.231.199:80/test/kubeedge-web-app:v2.6 119.23.231.199/test/kubeedge-web-app:v2.6
 
 docker tag ec-manager-web:v0.0.1 119.23.231.199/test/ec-manager-web:v0.0.4
 
