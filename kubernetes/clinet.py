@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+from kubernetes import client, config
+import openpyxl
+
+=======
 # from kubernetes import client, config
 # import openpyxl
 import urllib
@@ -10,6 +15,7 @@ print(new_text)
 print(urllib.parse.unquote("=~"))
 print(urllib.parse.quote("name=~"))
 print(urllib.parse.quote("name%3D~web"))
+>>>>>>> origin/main
 # Configs can be set in Configuration class directly or using helper utility
 # config.load_kube_config("E:\github\develop_doc\kubernetes\config")
 

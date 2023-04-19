@@ -40,7 +40,10 @@
 
 ```sh
 
+<<<<<<< HEAD
+=======
 # 配置harb
 kubectl create secret docker-registry harbor-secret --docker-server="http://119.23.231.199" --docker-username="admin" --docker-password="Pass01:)!!"
+>>>>>>> origin/main
 ```
 
