@@ -148,7 +148,11 @@ Creating nginx             ... done
 
 docker-compose stop  # 停止
 docker-compose start  # 启动(第一次需要使用 up -d)
+<<<<<<< HEAD
 docker-compose down # 停止并删除容器（慎用）
+=======
+docker-compose down -v # 停止并删除容器（慎用）
+>>>>>>> origin/main
 docker-compose up -d # 创建并启动
 
 
@@ -166,6 +170,7 @@ https://119.23.231.199/
 
 ```sh
 ## 测试
+<<<<<<< HEAD
 docker tag ec-manager-0.0.1:latest hub.ec.com/test/ec-manager:v0.0.1
 
 docker images
@@ -174,6 +179,47 @@ docker login hub.ec.com
 
 docker push hub.ec.com/test/ec-manager:v0.0.1
 ```
+=======
+docker tag ec-manager-0.0.1:latest 119.23.231.199:80/test/ec-manager:v0.0.2
+
+docker tag hub.docker.haoshuai.com/test/ec-manager:v0.0.3 119.23.231.199/test/ec-manager:v0.0.3
+
+docker tag ec-manager-web:v0.0.1 119.23.231.199:80/test/ec-manager-web:v0.0.2
+
+docker tag ec-manager-web:v0.0.1 119.23.231.199/test/ec-manager-web:v0.0.4
+
+docker tag ec-manager-0.0.1:latest 119.23.231.199/test/ec-manager:v0.0.4.1
+
+docker tag 119.23.231.199:80/test/ec-manager:v0.0.2 119.23.231.199/test/ec-manager-web:v0.0.2
+
+docker images
+
+cp certs/domain.crt /usr/local/share/ca-certificates/myregistrydomain.com.crt
+update-ca-certificates
+
+docker -D login hub.ec.com
+
+
+docker -D login 119.23.231.199:80 -u admin -p Harbor12345
+
+docker push 119.23.231.199:80/test/ec-manager-web:v0.0.2
+
+docker push hub.ec.com/test/ec-manager-web:v0.0.2
+```
+
+## 登陆失败 要拷贝ca证书 也就是开始的验证证书 拷贝到响应的目录
+
+```sh
+
+scp harborhost:/harbor/cert/path/ca.crt /usr/local/share/ca-certificate/ca.crt
+sudo update-ca-certificates
+sudo systemctl restart docker.service
+
+
+https://blog.csdn.net/nklinsirui/article/details/87952312
+```
+
+>>>>>>> origin/main
 **参考链接**
 
 - [github](https://github.com/goharbor/harbor)
