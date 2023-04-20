@@ -59,6 +59,30 @@ MinIO 使用 纠删码和校验和 机制来保证高可靠性，即便丢失一
 ## 安装脚本记录
 
 ```sh
+
+[req]
+distinguished_name = req_distinguished_name
+x509_extensions = v3_req
+prompt = no
+
+[req_distinguished_name]
+C = US
+ST = VA
+L = Somewhere
+O = MyOrg
+OU = MyOU
+CN = MyServerName
+
+[v3_req]
+subjectAltName = @alt_names
+
+[alt_names]
+IP.1 = 127.0.0.1
+
+openssl req -x509 -nodes -days 2730 -newkey rsa:2048 -keyout private.key -out public.crt -config openssl.conf
+
+
+
 docker pull quay.io/minio/minio
 
 mkdir -p /{data1,data2,data3,data4}
