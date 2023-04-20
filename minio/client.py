@@ -13,7 +13,16 @@ def main():
         secret_key="F4X1wp0JG7dz6V6kBWo14n7n8mzogLol",
         secure = False
     )
+    bs = client.list_buckets()
+    for i in bs:
+        print(bs)
+    
+    os = client.list_objects("test")
+    for i in os:
+        print(i)
 
+    return
+    
     # Make 'asiatrip' bucket if not exist.
     found = client.bucket_exists("test")
     if not found:

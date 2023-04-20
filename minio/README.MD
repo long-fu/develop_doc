@@ -60,29 +60,6 @@ MinIO 使用 纠删码和校验和 机制来保证高可靠性，即便丢失一
 
 ```sh
 
-[req]
-distinguished_name = req_distinguished_name
-x509_extensions = v3_req
-prompt = no
-
-[req_distinguished_name]
-C = US
-ST = VA
-L = Somewhere
-O = MyOrg
-OU = MyOU
-CN = MyServerName
-
-[v3_req]
-subjectAltName = @alt_names
-
-[alt_names]
-IP.1 = 127.0.0.1
-
-openssl req -x509 -nodes -days 2730 -newkey rsa:2048 -keyout private.key -out public.crt -config openssl.conf
-
-
-
 docker pull quay.io/minio/minio
 
 mkdir -p /{data1,data2,data3,data4}
@@ -176,5 +153,5 @@ if __name__ == "__main__":
 - [docker运行教程](https://min.io/docs/minio/container/index.html)
 - [minio官网](https://min.io/)
 - [github](https://github.com/minio/minio)
-- [云原生分布式文件存储 MinIO 保姆级中文教程](https://www.cnblogs.com/hahaha111122222/p/15981402.html)
+- [云原生分布式文件存储 MinIO 保姆级中文教程](https://mp.weixin.qq.com/s/_52kZ5jil1Cec98P5oozoA)
 - [分布式文件存储系统 Minio 实战](https://xie.infoq.cn/article/66ffc331f851f5873a3e1b2d3)
