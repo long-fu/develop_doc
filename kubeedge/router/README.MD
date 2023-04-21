@@ -2,8 +2,6 @@
 
 ## cloud to edge : rest->eventbus
 
-create-rule-rest-eventbus.yaml
-
 ```yaml
 
 apiVersion: rules.kubeedge.io/v1
