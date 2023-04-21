@@ -157,32 +157,27 @@ docker cp ea6477f33e0a:/opt/nvidia/deepstream/deepstream-6.1/samples/configs/dee
 
 netstat -lnp | grep 1883
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-ps 9612
-=======
-lsof -i tcp:8080
-
-ps 1777
->>>>>>> 60df48b8ad04f97f033a8a292038c4ca6c6b079a
-=======
 ps 9612
 
 lsof -i tcp:8080
 
 ps 1777
->>>>>>> origin/main
 
-kill -9 9555   
+ps 9612
+
+lsof -i tcp:8080
+
+ps 1777
+
+
+kill -9 7187   
 
 ssh -L localhost:8001:localhost:8001 -NT root@119.23.226.24
 
 ```
 
-<<<<<<< HEAD
 
 
-=======
 ## ssh文件拷贝
 
 ```sh
@@ -212,6 +207,5 @@ firewall-cmd --permanent --zone=public --add-port=80/tcp --permanent
 firewall-cmd --permanent --zone=public --add-port=443/tcp --permanent 
 firewall-cmd --permanent --zone=public --add-port=2376/tcp --permanent 
 ```
->>>>>>> origin/main
 
 
