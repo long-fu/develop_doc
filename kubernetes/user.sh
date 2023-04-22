@@ -1,6 +1,4 @@
-# k8s常见操作命令备份
-
-```sh
+kubectl create secret generic jenkins-docker-cfg -n devops-tools --from-file=/root/.docker/config.json
 
 
 # 卸载恢复
@@ -37,10 +35,7 @@ kubectl delete namespace kubeedge  --force --grace-period=0
 kubectl label node  [node name] [label key=vaalue]
 
 kubectl label node  k8s-master02 app=dashboard
-<<<<<<< HEAD
-=======
 kubectl label node  k8s-work ec-app=ec-dashboard
->>>>>>> origin/main
 
 kubectl label node  k8s-master03 app=dashboard-1
 
@@ -144,15 +139,12 @@ kubectl exec -it -ndefault hs-yolov5-deployment-dc758bbbd-pmtm6 --container t-ei
 
 kubectl exec -it -ndefault hs-yolov5-deployment-dc758bbbd-pmtm6 
 
-<<<<<<< HEAD
-=======
 kubectl exec -it -nec-dashboard ec-dashboard-6dfcb4f476-s78lz --container ec-dashboard-manager  /bin/bash
 
 kubectl exec -it -nec-dashboard ec-dashboard-64f5cd4697-ntfkj --container ec-dashboard-manager  /bin/bash
 
 kubectl describe pod -n ec-dashboard ec-dashboard-6dfcb4f476-s78lz
 
->>>>>>> origin/main
 kubectl describe pod -n kubernetes-dashboard kubernetes-dashboard-7ff554647d-rk4xv
 
 kubectl describe pod -n default nx-yolov5-deployment-54775b4dc5-p277x
@@ -162,14 +154,20 @@ kubectl describe pod -n kubeedge cloudcore-6c5c6cccd6-vvskv
 kubectl describe pod -n kubeedge cloudcore-6c5c6cccd6-bwqvb
 
 kubectl logs -n kubeedge cloudcore-6c5c6cccd6-vvskv -p
-<<<<<<< HEAD
-=======
 
 kubectl logs -n kubeedge cloudcore-6c5c6cccd6-vvskv -p
 
->>>>>>> origin/main
 kubectl label node  k8s-master03 my-app=dashboard
 
 kubectl get node --show-labels
 
-```
+# 使用适当的凭证与控制平面节点通信，运行：
+kubectl drain <node name> --delete-emptydir-data --force --ignore-daemonsets
+# 在删除节点之前，请重置 kubeadm 安装的状态：
+kubeadm reset
+# 重置过程不会重置或清除 iptables 规则或 IPVS 表。如果你希望重置 iptables，则必须手动进行：
+iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
+# 如果要重置 IPVS 表，则必须运行以下命令：
+ipvsadm -C
+# 现在删除节点：
+kubectl delete node <节点名称>
