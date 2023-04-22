@@ -36,7 +36,6 @@ sudo sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/g' /etc/s
 
 ,/ueE.9*_MdPg4G
 
-,/ueE.9*_MdPg4G
 
 https://docs.oracle.com/en/java/javase/index.html
-1. docker 运行 Jenkins 之心的mvn jdk路径是容器里面的路径，如果用自动下载 对网络要求非常高，自动下载的jdk一般用不了。直接手动安装，下载下来后进行解压，然后配置路径/
+1. docker 运行 Jenkins 之心的mvn jdk路径是容器里面的路径，如果用自动下载 对网络要求非常高，自动下载的jdk一般用不了。直接手动安装，下载好后 直接挂在到容器下面,下载下来后进行解压，然后配置路径.
