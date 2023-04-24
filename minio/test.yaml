@@ -1,11 +1,13 @@
-apiVersion: v1alpha1
+apiVersion: zh.io/v1alpha1
 kind: Inference
 metadata: 
   name: test-inference
-  namespace: defulter
+  # namespace: defulter
   labels:
     test: inference
 spec:
+  nodeSelector:
+    app-aa: hjellp
   nodeName: test-nano
   models:
    - name: face
