@@ -1,0 +1,17 @@
+apiVersion: v1alpha1
+kind: Inference
+metadata: 
+  name: test-inference
+  namespace: defulter
+  labels:
+    test: inference
+spec:
+  nodeName: test-nano
+  models:
+   - name: face
+     description: "人脸识别"
+     model: "image"
+     type: yolov5
+     path: "/data"
+     sha256sum: "kjashdajs"
+     size: 1231288

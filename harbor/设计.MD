@@ -1,10 +1,10 @@
-1. 设置宿主机配置
+1. 宿主机docker配置
 
-http:  在`/etc/docker/daemon.json` 增加字段配置`insecure-registries:['119.23.231.199']`
+http:  在`/etc/docker/daemon.json` 增加字段配置`insecure-registries:['119.23.231.199']`。
 
-https: 联系系统管理员获取ca证书存放在 `/etc/docker/certs.d/119.23.231.199`目录下。
+https: 联系系统管理员获取ca证书存放在 `/etc/docker/certs.d/119.23.231.199/ca.crt`。
 
-2. 验证
+2. 登录
 
 ```sh
 docker login 119.23.231.199
@@ -16,13 +16,13 @@ password: #输入密码
 
 ```sh
 # 打标签
-docker tag [local image]:[tag] 119.23.231.199:80/[project]/[repositorie]:[tag]
+docker tag [local image]:[tag] 119.23.231.199/[project]/[repositorie]:[tag]
 
 # 推送镜像
-docker push 119.23.231.199:80/[project]/[repositorie]:[tag]
+docker push 119.23.231.199/[project]/[repositorie]:[tag]
 
 # 拉取镜像
-docker pull 119.23.231.199:80/[project]/[repositorie]:[tag]
+docker pull 119.23.231.199/[project]/[repositorie]:[tag]
 ```
 
 ----

@@ -261,13 +261,16 @@ go run main.go
 **cloud**
 
 云端发送一个http请求，端口号是cloud core 默认定义的。
-endpoint: http://127.0.0.1:9443/{node name}/{namespace}/{paht}
+endpoint: http://127.0.0.1:9443/{node name}/{namespace}/{path}
 
 ```sh
 
 curl -H "Content-type: application/json" -X POST -d '{"msg":"cloud send"}' http://127.0.0.1:9443/nano-test/default/aa
 
+curl -H "Content-type: application/json" -X POST -d '{"msg":"pc info cloud send"}' http://119.23.226.24:9443/nano-test/default/aa
+
 ```
+
 ![](images/6.png)
 
 ![](images/5.png)
