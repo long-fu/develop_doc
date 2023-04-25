@@ -51,6 +51,41 @@ spec:
                         description: '模型大小 单位 字节'
                         type: integer
                   type: array
+            status:
+              description: '模型下载的状态情况'
+              type: object
+              properties:
+                startTime : 
+                  description: '模型下载状态集合'
+                  type: date
+                phase:
+                  description: '模型下载状态集合'
+                  type: string
+                  enum: ["Pending", "Succeeded", "Failed", "Unknown"]
+                message:
+                  description: '处于当前状态的原因'
+                  type: string
+                # conditions:
+                #   description: '模型下载状态集合'
+                #   type: array
+                #   items:
+                #     type: object
+                #     properties:
+                #       status:
+                #         description: "表明该状况是否适用，"
+                #         type: string
+                #         enum: ["True", "False", "Unknown"]
+                #       type: 
+                #         description: "状况的名称"
+                #         type: string
+                #         enum: ["ModelScheduled", "Model", "high"]
+                #       message:
+                #         description: "人类可读的消息"
+                #         type: string
+                #       lastTransitionTime:
+                #         description: "从上一个状态流转到下一个状态的时间"
+                #         type: date
+                        
               # required: 表示必须字段
               #  - nodeSelector
               #  - nodeName
