@@ -21,50 +21,51 @@ spec:
                 nodeName:
                   description: '模型关联的node'
                   type: string
-                models:
-                  type: array
-                  description: '一个节点上存在很多数据模型'
-                  items: 
-                    type: object
-                    properties:
-                      retrys:
-                        description: '重试下载模型次数'
-                        type: integer
-                      model: 
-                        description: '模型下载地址'
-                        type: string
-                      name:
-                        description: '模型名称'
-                        type: string
-                      type: 
-                        description: '模型类型'
-                        type: string
-                      path:
-                        description: '模型宿主机存储路径'
-                        type: string
-                      sha256sum:
-                        description: '模型签名 检验模型的完整性'
-                        type: string
-                      size:
-                        description: '模型大小 单位 字节'
-                        type: integer                  
+                model:
+                  type: object
+                  description: '存在的模型'
+                  properties:
+                    retrys:
+                      description: '重试下载模型次数'
+                      type: integer
+                    url: 
+                      description: '模型下载地址'
+                      type: string
+                    name:
+                      description: '模型名称'
+                      type: string
+                    type: 
+                      description: '模型类型'
+                      type: string
+                    path:
+                      description: '模型宿主机存储路径'
+                      type: string
+                    sha256sum:
+                      description: '模型签名 检验模型的完整性'
+                      type: string
+                    size:
+                      description: '模型大小 单位 字节'
+                      type: integer    
             status:
               description: '模型下载的状态情况'
               type: object
               properties:
                 retryCount:
                   description: '重新下载次数'
+                  format: int64
                   type: integer
                 startTime: 
                   description: '模型下载状态集合'
-                  type: date
+                  format: date
+                  type: string
                 phase:
                   description: '模型下载状态集合'
                   type: string
                   enum: ["Pending", "Succeeded", "Failed", "Unknown"]
                 lastTransitionTime:
                   description: '状态切换时间'
-                  type: date
+                  format: date
+                  type: string
                 message:
                   description: '处于当前状态的原因'
                   type: string                    
