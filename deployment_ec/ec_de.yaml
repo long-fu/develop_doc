@@ -5,6 +5,16 @@ metadata:
 
 ---
 
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: harbor
+  namespace: default
+imagePullSecrets:
+- name: harbor-secret
+
+---
+
 kind: Service
 apiVersion: v1
 metadata:
@@ -19,8 +29,6 @@ spec:
   selector:
     k8s-app: ec-dashboard
   type: NodePort
-  externalIPs: # 目标节点公网IP
-    - 119.23.231.199
 
 ---
 
@@ -32,8 +40,7 @@ metadata:
   name: ec-dashboard
   namespace: ec-dashboard
 spec:
-  replicas: 1
-  revisionHistoryLimit: 10
+  serviceAccount: harbor
   selector:
     matchLabels:
       k8s-app: ec-dashboard
@@ -42,22 +49,18 @@ spec:
       labels:
         k8s-app: ec-dashboard
     spec:
-      nodeSelector: # node标签选择 
-        ec-app: dashboard # 安装到包含ec-app=dashboard标签的node上
-      hostAliases: # pod hosts文件配置
-        - ip: "120.79.183.159"
-          hostnames:
-            - "k8s-vip"
+      nodeSelector:
+        ec-app: dashboard
       containers:
         - name: ec-dashboard-manager
-          image: ec-manager-0.0.1:latest
-          imagePullPolicy: Never # 直接从本地启动镜像
+          image: 119.23.231.199/test/ec-manager:v0.0.5
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
               protocol: TCP
         - name: ec-dashboard-web
-          image: ec-manager-web:v0.0.1
-          imagePullPolicy: Never # 直接从本地启动镜像
+          image: 119.23.231.199/test/ec-manager-web:v0.0.5.1
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8086
               protocol: TCP
