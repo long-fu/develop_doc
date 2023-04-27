@@ -1,9 +1,9 @@
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
-  name: inferences.zh
+  name: inferences.shuai.io
 spec:
-  group: zh
+  group: shuai.io
   versions:
     - name: v1alpha1
       served: true
@@ -14,53 +14,62 @@ spec:
           properties:
             spec:
               type: object
-              properties:
-                apiVersion:
-                  description: '版本'
-                  type: string
-                kind: 
-                  description: '类型'
-                  type: string
-                metadata:
+              properties: 
+                nodeSelector:
+                  description: '模型关联的node'
                   type: object
-                spec:
-                  properties: 
-                    nodeSelector:
-                      description: '模型需要下载的node 标签'
-                      type: object
-                    nodeName:
-                      description: '模型需要下载的node 名称'
-                      type: string
-                    models:
-                      description: '一个节点上存在很多数据模型'
-                      items: 
-                        properties:
-                          model: 
-                            description: '模型下载地址'
-                            type: string
-                          description:
-                            description: "模型描述"
-                            type: string
-                          name:
-                            description: '模型名称'
-                            type: string
-                          type: 
-                            description: '模型类型 yolov5 trt tf'
-                            type: string
-                          path:
-                            description: '模型存储路径'
-                            type: string
-                          sha256sum:
-                            description: '模型签名 检验模型的完整性'
-                            type: string
-                          size:
-                            description: '模型大小 单位 字节'
-                            type: number
-                      type: array
-                  required:
-                   - nodeSelector
-                   - nodeName
-                  type: object  
+                nodeName:
+                  description: '模型关联的node'
+                  type: string
+                models:
+                  type: array
+                  description: '一个节点上存在很多数据模型'
+                  items: 
+                    type: object
+                    properties:
+                      retrys:
+                        description: '重试下载模型次数'
+                        type: integer
+                      model: 
+                        description: '模型下载地址'
+                        type: string
+                      name:
+                        description: '模型名称'
+                        type: string
+                      type: 
+                        description: '模型类型'
+                        type: string
+                      path:
+                        description: '模型宿主机存储路径'
+                        type: string
+                      sha256sum:
+                        description: '模型签名 检验模型的完整性'
+                        type: string
+                      size:
+                        description: '模型大小 单位 字节'
+                        type: integer                  
+            status:
+              description: '模型下载的状态情况'
+              type: object
+              properties:
+                retryCount:
+                  description: '重新下载次数'
+                  type: integer
+                startTime: 
+                  description: '模型下载状态集合'
+                  type: date
+                phase:
+                  description: '模型下载状态集合'
+                  type: string
+                  enum: ["Pending", "Succeeded", "Failed", "Unknown"]
+                lastTransitionTime:
+                  description: '状态切换时间'
+                  type: date
+                message:
+                  description: '处于当前状态的原因'
+                  type: string                    
+      subresources:
+        status: {}
   scope: Namespaced
   names:
     plural: inferences
