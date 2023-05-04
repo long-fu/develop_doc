@@ -51,6 +51,8 @@ kubectl create -f create-rule-rest-eventbus.yaml
 
 **edge**
 
+先在边缘端进行消息的订阅
+
 ```sh
 # 进入到mqtt 容器中
 docker exec -it b2f73d901244 sh
@@ -64,9 +66,13 @@ mosquitto_sub -t 'test' -d
 
 ```sh
 # http://{rest_endpoint}/{node_name}/{namespace}/{path}
+# 9443 端口号是 cloud 默认开启的端口号，在 cloudcore configmap 中有定义
 curl -H "Content-type: application/json" -X POST -d '{"msg":"cloud send"}' http://127.0.0.1:9443/nano-test/default/a
 ```
 
+![](images/1.png)
+
+![](images/2.png)
 
 
 ## edge to cloud ： eventbus->rest
@@ -121,19 +127,10 @@ kubectl create -f create-rule-rest-eventbus.yaml
 
 ### 测试
 
-**edge core**
-
-```sh
-
-# 进入到mqtt 容器中
-docker exec -it b2f73d901244 sh
-
-mosquitto_pub -t 'default/test' -d -m '{"edgemsg":"msgtocloud"}'
-
-```
 
 **cloud core**
 
+先在云端启动一个监听8080端口的http服务。端口号是上面 resource 定义的，以及监听路经。
 
 ```go
 package main
@@ -157,6 +154,7 @@ func main() {
 ```sh
 
 # 运行一个http服务 
+
 go mod init test
 # 换国内的源比较快
 go mod tidy
@@ -165,6 +163,23 @@ go run main.go
 
 ```
 
+
+**edge core**
+
+边缘端进入到mosquitto容器中 进行一个mqtt的消息推送
+
+```sh
+
+# 进入到mqtt 容器中
+docker exec -it b2f73d901244 sh
+
+mosquitto_pub -t 'default/test' -d -m '{"edgemsg":"msgtocloud"}'
+
+```
+
+![](images/3.png)
+
+![](images/4.png)
 
 
 ## cloud to edge : rest->servicebus
@@ -212,17 +227,9 @@ spec:
 ### 测试
 
 
-**cloud**
-
-```sh
-
-curl -H "Content-type: application/json" -X POST -d '{"msg":"cloud send"}' http://127.0.0.1:9443/nano-test/default/aa
-
-```
-
 **edge**
 
-运行一个go的服务器代码，监听6666端口
+在边缘端启用一个http服务，监听6666端口号，端口号在上面中有定义。
 
 ```go
 package main
@@ -250,3 +257,20 @@ go mod tidy
 # 运行服务
 go run main.go
 ```
+
+**cloud**
+
+云端发送一个http请求，端口号是cloud core 默认定义的。
+endpoint: http://127.0.0.1:9443/{node name}/{namespace}/{path}
+
+```sh
+
+curl -H "Content-type: application/json" -X POST -d '{"msg":"cloud send"}' http://127.0.0.1:9443/nano-test/default/aa
+
+curl -H "Content-type: application/json" -X POST -d '{"msg":"pc info cloud send"}' http://119.23.226.24:9443/nano-test/default/aa
+
+```
+
+![](images/6.png)
+
+![](images/5.png)

@@ -85,6 +85,13 @@ kubectl label node k8s-master03 ec-app=dashboard
 kubectl get node k8s-master03 --show-labels
 ```
 
+3.
+
+```sh
+# 配置harb
+kubectl create secret docker-registry harbor-secret --docker-server="http://119.23.231.199" --docker-username="admin" --docker-password="Pass01:)!!"
+```
+
 - 部署yaml配置文件
 
 ```yaml
@@ -92,6 +99,16 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: ec-dashboard
+
+---
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: harbor
+  namespace: ec-dashboard
+imagePullSecrets:
+- name: harbor-secret
 
 ---
 

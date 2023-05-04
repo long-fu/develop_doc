@@ -2,7 +2,7 @@
 # file_uploader.py
 from minio import Minio
 from minio.error import S3Error
-
+import json
 
 def main():
     # Create a client with the MinIO server playground, its access key
@@ -13,14 +13,33 @@ def main():
         secret_key="F4X1wp0JG7dz6V6kBWo14n7n8mzogLol",
         secure = False
     )
-    bs = client.list_buckets()
-    for i in bs:
-        print(bs)
-    
-    os = client.list_objects("test")
-    for i in os:
-        print(i)
+    events = client.listen_bucket_notification("test")
+    # events = client.listen_bucket_notification('my-bucket', 'my-prefix/',
+    #                                        '.my-suffix',
+    #                                        ['s3:ObjectCreated:*',
+    #                                         's3:ObjectRemoved:*',
+    #                                         's3:ObjectAccessed:*'])
+    for event in events:
+        print(event)
 
+    # bs = client.list_buckets()
+    # for i in bs:
+    #     print(bs)
+    
+    # os = client.list_objects("test")
+    # for i in os:
+    #     print(i)
+
+    # config = client.get_bucket_tags("test")
+    # print(config)
+
+    # info = client.stat_object("test","ec-manager-0419.tar",extra_query_params={"name":"h"})
+    # dic_obj = info.__dict__
+    # print(dic_obj)
+    # print(json.dumps(dic_obj))
+    # print(json.load(info))
+    # print(json.dumps(info))
+    
     return
     
     # Make 'asiatrip' bucket if not exist.

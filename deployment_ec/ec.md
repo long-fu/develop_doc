@@ -85,6 +85,26 @@ kubectl label node k8s-master03 ec-app=dashboard
 kubectl get node k8s-master03 --show-labels
 ```
 
+3. 配置镜像拉取配置
+
+[参考教程](https://kubernetes.io/zh-cn/docs/tasks/configure-pod-container/pull-image-private-registry/)
+
+```sh
+kubectl create secret docker-registry [secret name] \
+  --docker-server=<你的镜像仓库服务器> \
+  --docker-username=<你的用户名> \
+  --docker-password=<你的密码> \
+  --docker-email=<你的邮箱地址>
+
+kubectl create -ns ec-dashboard
+
+kubectl create secret docker-registry harbor01 -n ec-dashboard \
+  --docker-server=119.23.231.199 \
+  --docker-username=admin \
+  --docker-password="Pass01:)."
+```
+
+
 - 部署yaml配置文件
 
 ```yaml
@@ -92,6 +112,16 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: ec-dashboard
+
+---
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: harbor
+  namespace: ec-dashboard
+imagePullSecrets:
+- name: harbor-secret
 
 ---
 
@@ -109,8 +139,6 @@ spec:
   selector:
     k8s-app: ec-dashboard
   type: NodePort
-  externalIPs: # 目标节点公网IP
-    - 119.23.231.199
 
 ---
 
@@ -122,8 +150,7 @@ metadata:
   name: ec-dashboard
   namespace: ec-dashboard
 spec:
-  replicas: 1
-  revisionHistoryLimit: 10
+  serviceAccount: harbor
   selector:
     matchLabels:
       k8s-app: ec-dashboard
@@ -132,26 +159,21 @@ spec:
       labels:
         k8s-app: ec-dashboard
     spec:
-      nodeSelector: # node标签选择 
-        ec-app: dashboard # 安装到包含ec-app=dashboard标签的node上
-      hostAliases: # pod hosts文件配置
-        - ip: "120.79.183.159"
-          hostnames:
-            - "k8s-vip"
+      nodeSelector:
+        ec-app: dashboard
       containers:
         - name: ec-dashboard-manager
-          image: ec-manager-0.0.1:latest
-          imagePullPolicy: Never # 直接从本地启动镜像
+          image: 119.23.231.199/test/ec-manager:v0.0.5
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
               protocol: TCP
         - name: ec-dashboard-web
-          image: ec-manager-web:v0.0.1
-          imagePullPolicy: Never # 直接从本地启动镜像
+          image: 119.23.231.199/test/ec-manager-web:v0.0.5.1
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8086
               protocol: TCP
-
 ```
 
 3. 导入之前生成的镜像
