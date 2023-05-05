@@ -7,6 +7,11 @@ class MainHandler(web.RequestHandler):
     def post(self):
         self.write("Hello, world")
     
+class DeleteModelHandler(web.RequestHandler):
+    def post(self):
+        # 删除资源
+        pass
+    pass
 class ModelSpecHandler(web.RequestHandler):
     def post(self):
         body = self.request.body
