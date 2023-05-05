@@ -1,8 +1,8 @@
 1. 宿主机docker配置
 
-http:  在`/etc/docker/daemon.json` 增加字段配置`insecure-registries:['119.23.231.199']`。
+**http:**  在`/etc/docker/daemon.json` 增加字段配置`insecure-registries:['119.23.231.199']`。
 
-https: 联系系统管理员获取ca证书存放在 `/etc/docker/certs.d/119.23.231.199/ca.crt`。
+**https:** 联系系统管理员获取ca证书存放在 `/etc/docker/certs.d/119.23.231.199/ca.crt`。
 
 2. 登录
 
