@@ -9,7 +9,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: harbor
-  namespace: default
+  namespace: ec-dashboard
 imagePullSecrets:
 - name: harbor-secret
 
@@ -31,7 +31,6 @@ spec:
   type: NodePort
 
 ---
-
 kind: Deployment
 apiVersion: apps/v1
 metadata:
@@ -40,7 +39,6 @@ metadata:
   name: ec-dashboard
   namespace: ec-dashboard
 spec:
-  serviceAccount: harbor
   selector:
     matchLabels:
       k8s-app: ec-dashboard
@@ -49,17 +47,21 @@ spec:
       labels:
         k8s-app: ec-dashboard
     spec:
-      nodeSelector:
-        ec-app: dashboard
+      # nodeSelector:
+      #   ec-app: dashboard
+      nodeName: k8s-work
+      # serviceAccount: harbor
+      imagePullSecrets:
+        - name: harbor-secret
       containers:
         - name: ec-dashboard-manager
-          image: 119.23.231.199/test/ec-manager:v0.0.5
+          image: 119.23.231.199/test/ec-manager@sha256:e620dfc55662f62b5ff9af7dd58f24072b09bdf6df1f127d1025856ae895afb2
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
               protocol: TCP
         - name: ec-dashboard-web
-          image: 119.23.231.199/test/ec-manager-web:v0.0.5.1
+          image: 119.23.231.199/test/ec-manager-web@sha256:c9f26ec9af7dada94c17ebc5bb5688e33804bc8b587eaaaaa708b79022293997
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8086

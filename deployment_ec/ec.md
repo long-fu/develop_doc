@@ -87,6 +87,8 @@ kubectl get node k8s-master03 --show-labels
 
 3. 配置镜像拉取配置
 
+**请注意命名空间的限制**
+
 [参考教程](https://kubernetes.io/zh-cn/docs/tasks/configure-pod-container/pull-image-private-registry/)
 
 ```sh
@@ -98,7 +100,9 @@ kubectl create secret docker-registry [secret name] \
 
 kubectl create -ns ec-dashboard
 
-kubectl create secret docker-registry harbor01 -n ec-dashboard \
+
+# **请注意命名空间的限制**
+kubectl create secret docker-registry harbor-secret -n ec-dashboard \
   --docker-server=119.23.231.199 \
   --docker-username=admin \
   --docker-password="Pass01:)."
@@ -115,6 +119,7 @@ metadata:
 
 ---
 
+# **请注意命名空间的限制**
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -150,7 +155,6 @@ metadata:
   name: ec-dashboard
   namespace: ec-dashboard
 spec:
-  serviceAccount: harbor
   selector:
     matchLabels:
       k8s-app: ec-dashboard
@@ -161,15 +165,17 @@ spec:
     spec:
       nodeSelector:
         ec-app: dashboard
+      imagePullSecrets:
+        - name: harbor-secret
       containers:
         - name: ec-dashboard-manager
-          image: 119.23.231.199/test/ec-manager:v0.0.5
+          image: 119.23.231.199/test/ec-manager:v0.0.6
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
               protocol: TCP
         - name: ec-dashboard-web
-          image: 119.23.231.199/test/ec-manager-web:v0.0.5.1
+          image: 119.23.231.199/test/ec-manager-web:v0.0.6
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8086
