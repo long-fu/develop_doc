@@ -12,10 +12,14 @@ chmod +x kubebuilder && mv kubebuilder /usr/local/bin/
 mkdir -p ~/projects/guestbook
 cd ~/projects/guestbook
 
-kubebuilder init --domain k8s.io --repo k8s.io/kubeeccontroller
+domain 不能是k8s.io
+
+group 也不能包含k8s.io
+
+kubebuilder init --domain haoshuai32.github.io --repo haoshuai32.github.io/kubeeccontroller
 
 
-kubebuilder create api --group kubeeccontroller.k8s.io --version v1 --kind Model
+kubebuilder create api --group kubeec --version v1 --kind Model
 
 GITHUB_TOKEN=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
 
