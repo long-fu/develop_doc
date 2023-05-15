@@ -14,8 +14,11 @@ cd ~/projects/guestbook
 
 kubebuilder init --domain k8s.io --repo k8s.io/kubeeccontroller
 
+kubebuilder init --domain ec.io --repo ec.io/ec-controller
 
 kubebuilder create api --group kubeeccontroller.k8s.io --version v1 --kind Model
+
+kubebuilder create api --group ec.io --version v1 --kind Model
 
 GITHUB_TOKEN=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
 
