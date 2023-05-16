@@ -1,0 +1,1 @@
+GOOS=linux GOARCH=arm CGO_ENABLED=1 CC=arm-linux-gnueabi-gcc go build -o ec-client cmd/main.go
