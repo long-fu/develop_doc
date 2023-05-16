@@ -14,11 +14,17 @@ cd ~/projects/guestbook
 
 domain 不能是k8s.io
 
+<<<<<<< HEAD
 group 也不能包含k8s.io
+=======
+kubebuilder init --domain ec.io --repo ec.io/ec-controller
+>>>>>>> origin/main
 
 kubebuilder init --domain haoshuai32.github.io --repo haoshuai32.github.io/kubeeccontroller
 
 kubebuilder init --domain ec.io --repo ec.io/ec-controller
+
+kubebuilder create api --group ec.io --version v1 --kind Model
 
 kubebuilder create api --group ec.io --version v1 --kind Model
 

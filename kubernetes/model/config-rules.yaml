@@ -1,0 +1,69 @@
+
+apiVersion: rules.kubeedge.io/v1
+kind: RuleEndpoint
+metadata:
+  name: ec-controller-rest
+  namespace: ec-system
+  labels:
+    description: ""
+spec:
+  ruleEndpointType: "rest"
+  properties: {}
+
+---
+
+apiVersion: rules.kubeedge.io/v1
+kind: RuleEndpoint
+metadata:
+  name: ec-controller-servicebus
+  namespace: ec-system
+  labels:
+    description: ""
+spec:
+  ruleEndpointType: "servicebus"
+  properties: {"service_port":"9898"}
+
+--- 
+
+apiVersion: rules.kubeedge.io/v1
+kind: Rule
+metadata:
+  name: ec-controller-model-put-rule-rest-servicebus
+  namespace: ec-system
+  labels:
+    description: ""
+spec:
+  source: "ec-controller-rest"
+  sourceResource: {"path":"/api/v1/model/put"}
+  target: "ec-controller-servicebus"
+  targetResource: {"path":"/api/v1/model/put"}
+
+---
+
+apiVersion: rules.kubeedge.io/v1
+kind: Rule
+metadata:
+  name: ec-controller-model-delete-rule-rest-servicebus
+  namespace: ec-system
+  labels:
+    description: ""
+spec:
+  source: "ec-controller-rest"
+  sourceResource: {"path":"/api/v1/model/delete"}
+  target: "ec-controller-servicebus"
+  targetResource: {"path":"/api/v1/model/delete"}
+
+---
+
+apiVersion: rules.kubeedge.io/v1
+kind: Rule
+metadata:
+  name: ec-controller-model-status-rule-rest-servicebus
+  namespace: ec-system
+  labels:
+    description: ""
+spec:
+  source: "ec-controller-rest"
+  sourceResource: {"path":"/api/v1/model/status"}
+  target: "ec-controller-servicebus"
+  targetResource: {"path":"/api/v1/model/status"}
