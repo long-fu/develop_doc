@@ -18,8 +18,9 @@ group 也不能包含k8s.io
 
 kubebuilder init --domain haoshuai32.github.io --repo haoshuai32.github.io/kubeeccontroller
 
+kubebuilder init --domain ec.io --repo ec.io/ec-controller
 
-kubebuilder create api --group kubeec --version v1 --kind Model
+kubebuilder create api --group ec.io --version v1 --kind Model
 
 GITHUB_TOKEN=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
 

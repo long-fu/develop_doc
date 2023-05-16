@@ -17,3 +17,12 @@ k8s.io/apimachinery v0.0.0-20230508165628-e7958c5fe270
 k8s.io/code-generator v0.0.0-20230509180209-89a7a4d0e489
 
 必须要初始化git仓库
+
+## 准备条件
+
+> clone sample-controller项目 这个项目有生成代码的基本配置 已级脚本
+
+
+## 创建自己的项目
+
+1. 创建工程
