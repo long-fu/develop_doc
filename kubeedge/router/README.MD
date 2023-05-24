@@ -269,6 +269,12 @@ curl -H "Content-type: application/json" -X POST -d '{"msg":"cloud send"}' http:
 
 curl -H "Content-type: application/json" -X POST -d '{"msg":"pc info cloud send"}' http://119.23.226.24:9443/nano-test/default/aa
 
+curl -H "Content-type: application/json" -X POST -d '{"msg":"pc info cloud send"}' http://127.0.0.1:9443/nano-test/ec-system/api/v1/model/put
+
+curl -H "Content-type: application/json" -X POST -d '{"msg":"pc info cloud send"}' http://119.23.226.24:9443/nano-test/default/api/v1/model/put
+
+curl -H "Content-type: application/json" -X POST -d '{"msg":"pc info cloud send"}' http://119.23.226.24:9443/nano-test/ec-system/api/v1/model/put
+
 ```
 
 ![](images/6.png)
