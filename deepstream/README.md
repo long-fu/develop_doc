@@ -4,6 +4,8 @@
 
 [英伟达 Jetson Nano 新手必备：使用CSI或USB摄像头拍摄第一张照片](http://www.taodudu.cc/news/show-4199292.html?action=onClick)
 
+
+[NVIDIA DeepStream配置文件解析；摄像头源&&RTSP拉流源输入，RTSP推流输出](https://blog.csdn.net/Yan_uuu/article/details/127389866)
 ## deeepstream 安装
 
 ```sh
