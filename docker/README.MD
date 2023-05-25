@@ -14,6 +14,10 @@ cat t-eio-manager-0.0.1.tar | docker import - t-eio/ec-manager:v0.0.1
 
 cat t-eio-web-0.0.1.tar | docker import - t-eio/ec-manager-web:v0.0.1
 
+docker save ec-manager-web:v0.0.1 > ec-manager-web.tar
+
+# 导入api镜像
+docker load < ec-manager.tar
 ```
 
 0. 运行容器
@@ -73,7 +77,7 @@ docker rmi --force $(docker images -q)
 # 例如删除包含“some”的镜像
 docker rmi --force $(docker images | grep goharbor | awk '{print $3}')
 
-
+docker rmi --force $(docker images | grep none | awk '{print $3}')
 
 ```
 
