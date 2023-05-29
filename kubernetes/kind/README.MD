@@ -27,5 +27,5 @@ kind load docker-image quay.io/tigera/operator:v1.29.0 quay.io/tigera/operator:v
 
 kind load docker-image quay.io/tigera/operator:v1.28.5 quay.io/tigera/operator:v1.28.5
 
-kind load docker-image eclipse-mosquitto:1.6.15 eclipse-mosquitto:1.6.15
+kind load docker-image nginx:latest nginx:latest
 ```

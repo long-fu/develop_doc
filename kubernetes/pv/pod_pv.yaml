@@ -11,7 +11,7 @@ spec:
     namespace: default
   capacity:
     storage: 10Gi
-  # volumeMode: Filesystem
+  volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
     - ReadWriteMany
@@ -31,7 +31,7 @@ spec:
   volumeName: pv0000
   accessModes:
     - ReadWriteMany
-  # volumeMode: Filesystem
+  volumeMode: Filesystem
   resources:
     requests:
       storage: 1Gi
