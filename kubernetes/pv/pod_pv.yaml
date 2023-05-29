@@ -17,7 +17,7 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Recycle # 回收策略
   nfs:
-    path: /nfs_share
+    path: /nfs_share/test
     server: 192.168.8.54
 ---
 
