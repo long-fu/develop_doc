@@ -17,10 +17,10 @@ sudo apt install nfs-kernel-server
 
 sudo systemctl start nfs-kernel-server.service
 
-sudo mkdir /nfsroot
+sudo mkdir /nfs_share
 
 sudo vi /etc/exports
-/nfsroot  *(rw,sync,no_subtree_check)
+/nfs_share  *(rw,sync,no_subtree_check)
 
 # /nfsroot：指定/nfsroot为nfs服务器的共享目录
 # *：允许所有的网段访问，也可以使用具体的IP
@@ -31,22 +31,87 @@ sudo vi /etc/exports
 
 sudo exportfs -a
 
-
-
-
 showmount -e localhost
 ```
 
 ### PV,PVC 配置
 
 ```sh
+cd /nfs_share
+
+# 这里再次假定你的节点使用 "sudo" 来以超级用户角色执行命令
+sudo sh -c "echo 'Hello from Kubernetes storage' > /nfs_share/index.html"
+
+cat /nfs_share/index.html
 
 ```
 
-### Pod 部署
+```yaml
 
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv0000
+  namespace: default
+spec:
+  storageClassName: ""
+  claimRef:
+    name: pvc0000
+    namespace: default
+  capacity:
+    storage: 10Gi
+  # volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle # 回收策略
+  nfs:
+    path: /nfs_share
+    server: 192.168.8.54
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc0000
+  namespace: default
+spec:
+  storageClassName: "" # 此处须显式设置空字符串，否则会被设置为默认的 StorageClass
+  volumeName: pv0000
+  accessModes:
+    - ReadWriteMany
+  # volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: task-pv-pod
+spec:
+  containers:
+    - name: task-pv-container
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+      - mountPath: "/usr/share/nginx/html"
+        name: task-pv-storage
+  volumes:
+    - name: task-pv-storage
+      persistentVolumeClaim:
+        claimName: pvc0000
+```
+
+- 测试
 ```sh
+kubectl exec -it  task-pv-pod bash
 
+curl 127.0.0.1
 ```
 
 ## 参考地址
@@ -57,7 +122,10 @@ showmount -e localhost
 
 -[持久卷 PV](https://kubernetes.io/zh-cn/docs/concepts/storage/persistent-volumes/)
 
--[预留 PersistentVolume PVC](https://kubernetes.io/zh-cn/docs/concepts/storage/persistent-volumes/#reserving-a-persistentvolume)
+-[预留 PersistentVolume PVC](https://kubernetes.io/zh-cn/docs/concepts/storage/persistent-volumes/#reserving  volumes:
+    - name: task-pv-storage
+      persistentVolumeClaim:
+        claimName: task-pv-claim-a-persistentvolume)
 
 -[持久卷申领]
 
