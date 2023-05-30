@@ -11,3 +11,5 @@ __pycache__
 *.tgz
 CPP/main
 kubernetes/api
+deepstream/deepstream-6.2/*
+deepstream/deepstream-6.2.zip

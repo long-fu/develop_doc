@@ -6,6 +6,44 @@
 
 
 [NVIDIA DeepStream配置文件解析；摄像头源&&RTSP拉流源输入，RTSP推流输出](https://blog.csdn.net/Yan_uuu/article/details/127389866)
+
+## Install the nvidia-container-toolkit
+
+```sh
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+curl -s -L https://nvidia.github.io/libnvidia-container/gpgkey | sudo apt-key add -
+curl -s -L https://nvidia.github.io/libnvidia-container/$distribution/libnvidia-container.list | sudo tee /etc/apt/sources.list.d/libnvidia-container.list
+
+sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
+
+sudo dpkg --get-selections | grep nvidia
+
+sudo docker info | grep nvidia
+
+
+```
+
+## Configure docker
+
+```json
+{
+    "default-runtime": "nvidia",
+    "runtimes": {
+        "nvidia": {
+            "path": "/usr/bin/nvidia-container-runtime",
+            "runtimeArgs": []
+        }
+    }
+}
+```
+
+And then restart docker:
+
+```sh
+sudo systemctl restart docker
+```
+
+
 ## deeepstream 安装
 
 ```sh
