@@ -7,6 +7,14 @@
 
 [NVIDIA DeepStream配置文件解析；摄像头源&&RTSP拉流源输入，RTSP推流输出](https://blog.csdn.net/Yan_uuu/article/details/127389866)
 
+
+# 测试摄像头
+```sh
+
+nvgstcapture-1.0 --orientation 2
+
+```
+
 ## Install the nvidia-container-toolkit
 
 ```sh

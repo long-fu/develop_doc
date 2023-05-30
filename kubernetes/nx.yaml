@@ -12,14 +12,15 @@ spec:
       labels:
         k8s-app: deepstream
     spec:
-      nodeName: nxtest
+      nodeName: admin123-desktop
       containers:
         - name: deepstream
-          image: nvcr.io/nvidia/deepstream-l4t:6.2-samples
+          image: nvcr.io/nvidia/deepstream-l4t:6.2-base
           imagePullPolicy: Never
+          workingDir: "/opt/nvidia/deepstream/deepstream-6.2"
           env:
-            - name: "DISPLAY"
-              value: ":1"
+          - name: "DISPLAY"
+            value: ":1"
           volumeMounts:
           - name: X11-volume
             mountPath: /tmp/.X11-unix
@@ -27,6 +28,8 @@ spec:
             mountPath: /dev/video0
           - name: argus_socket
             mountPath: /tmp/argus_socket
+          - name: deepstream-6
+            mountPath: /opt/nvidia/deepstream/deepstream-6.2
           securityContext:
             privileged: true
       volumes:
@@ -39,4 +42,7 @@ spec:
         - name: argus_socket
           hostPath:
             path: /tmp/argus_socket
+        - name: deepstream-6
+          hostPath:
+            path: /home/admin123/haoshuai/deepstream-6.2
       
