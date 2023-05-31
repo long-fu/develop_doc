@@ -13,3 +13,5 @@ CPP/main
 kubernetes/api
 deepstream/deepstream-6.2/*
 deepstream/deepstream-6.2.zip
+kubernetes/nvidia/deepstream-6.2/*
+deepstream-6.2.zip

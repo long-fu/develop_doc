@@ -1,3 +1,5 @@
+# Deepstream Docker容器方式在nx上运行
+
 ## Install the nvidia-container-toolkit
 
 ```sh
@@ -93,8 +95,6 @@ rtsp://192.168.8.62:8555/ds-test
 
 ##---
 
-
-
 ```
 
 ### 直接启动
@@ -121,3 +121,13 @@ CMD [ "./samples/configs/deepstream-app/source1_csi_dec_infer_resnet_int8.txt" ]
 # 直接后台运行
 docker run -d --runtime nvidia -p 8555:8554 -p 5401:5400 --privileged -v /tmp/argus_socket:/tmp/argus_socket --device=/dev/video0 haoshuai/deepstream-l4t:6.2
 ```
+
+## k8s用例
+
+```sh
+kubectl create -f deepstream_not_cmd.yaml
+```
+
+在边端同一共工作网络中拉流
+
+rtsp://192.168.8.62:8554/ds-test
