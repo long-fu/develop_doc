@@ -55,6 +55,10 @@ sudo systemctl restart docker
 ## deeepstream 安装
 
 ```sh
+
+# 
+docker run --rm -it -e MTX_PROTOCOLS=tcp -p 8554:8554 aler9/rtsp-simple-server
+
 # pc
 
 docker pull nvcr.io/nvidia/deepstream:6.2-samples
