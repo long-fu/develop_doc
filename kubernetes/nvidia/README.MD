@@ -48,7 +48,9 @@ sudo xhost +si:localuser:root
 
 sudo docker run -it --rm --net=host --runtime nvidia  -e DISPLAY=$DISPLAY -w /opt/nvidia/deepstream/deepstream-6.2 -v /tmp/.X11-unix/:/tmp/.X11-unix nvcr.io/nvidia/deepstream-l4t:6.2-base
 
-docker run --gpus all -it --rm --net=host -p 8554:8554 -p 5400:5400  --privileged -v /tmp/.X11-unix:/tmp/.X11-unix -v /tmp/argus_socket:/tmp/argus_socket -v /home/admin123/haoshuai/deepstream-6.2:/opt/nvidia/deepstream/deepstream-6.2 --device=/dev/video0 -e DISPLAY=$DISPLAY -w /opt/nvidia/deepstream/deepstream-6.2 nvcr.io/nvidia/deepstream-l4t:6.2-base
+docker run --rm -it --network=host aler9/rtsp-simple-server
+
+docker run --gpus all -it --rm --net=host --privileged -v /tmp/argus_socket:/tmp/argus_socket -v /home/admin123/haoshuai/deepstream-6.2:/opt/nvidia/deepstream/deepstream-6.2 --device=/dev/video0 -w /opt/nvidia/deepstream/deepstream-6.2 nvcr.io/nvidia/deepstream-l4t:6.2-base
 
 docker run -it --rm --net=host --runtime nvidia -p 8554:8554 -p 5400:5400  --privileged -v /tmp/.X11-unix:/tmp/.X11-unix -v /tmp/argus_socket:/tmp/argus_socket -v /home/admin123/haoshuai/deepstream-6.2:/opt/nvidia/deepstream/deepstream-6.2 --device=/dev/video0 -e DISPLAY=$DISPLAY -w /opt/nvidia/deepstream/deepstream-6.2 nvcr.io/nvidia/deepstream-l4t:6.2-base
 

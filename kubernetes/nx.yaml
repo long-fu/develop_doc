@@ -6,11 +6,9 @@ spec:
   ports:
     - name: rtsp-port
       port: 8554
-      nodePort: 8554
       targetPort: 8554
     - name: udp-port
       port: 5400
-      nodePort: 5400
       targetPort: 5400
   selector:
     app: deepstream-pod
