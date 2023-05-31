@@ -64,6 +64,8 @@ sudo docker rmi $(docker images -f "dangling=true" -q) #删除所有镜像
 # 删掉容器
 docker stop $(docker ps -qa)
 docker rm $(docker ps -qa)
+
+docker rm --force $(docker ps -a | grep Exited | awk '{print $1}')
 ```
 
 ```sh
