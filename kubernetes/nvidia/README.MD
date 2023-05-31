@@ -53,6 +53,11 @@ sudo docker run -it --rm --net=host --runtime nvidia  -e DISPLAY=$DISPLAY -w /op
 # 改造
 docker run --runtime nvidia -it --rm -p 8554:8554 -p 5400:5400 --privileged -v /tmp/argus_socket:/tmp/argus_socket -v /home/admin123/haoshuai/deepstream-6.2:/opt/nvidia/deepstream/deepstream-6.2 --device=/dev/video0 -w /opt/nvidia/deepstream/deepstream-6.2 nvcr.io/nvidia/deepstream-l4t:6.2-base
 
+# 只能在主机上运行
+docker run --runtime nvidia -it --rm -p 8554:8554 -p 5400:5400 --privileged -v /tmp/.X11-unix:/tmp/.X11-unix -v /tmp/argus_socket:/tmp/argus_socket -v /home/admin123/haoshuai/deepstream-6.2:/opt/nvidia/deepstream/deepstream-6.2 -e DISPLAY=$DISPLAY --device=/dev/video0 -w /opt/nvidia/deepstream/deepstream-6.2 nvcr.io/nvidia/deepstream-l4t:6.2-base
+
+docker run --runtime nvidia -it --rm -p 8554:8554 -p 5400:5400 --privileged -v /tmp/.X11-unix:/tmp/.X11-unix -v /tmp/argus_socket:/tmp/argus_socket -v /home/admin123/haoshuai/deepstream-6.2:/opt/nvidia/deepstream/deepstream-6.2 -e DISPLAY=:1 --device=/dev/video0 -w /opt/nvidia/deepstream/deepstream-6.2 nvcr.io/nvidia/deepstream-l4t:6.2-base
+
 # 容器中运行的命名----
 ./install.sh
 ./user_additional_install.sh
