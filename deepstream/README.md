@@ -49,6 +49,8 @@ sudo systemctl restart docker
 
 ```sh
 
+wget -O obs-rtspserver-linux.deb https://github.com/iamscottxu/obs-rtspserver/releases/download/3.0.0/obs-rtspserver-3.0.0-linux.deb
+
 # 
 docker run --rm -it -e MTX_PROTOCOLS=tcp -p 8554:8554 aler9/rtsp-simple-server
 
