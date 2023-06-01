@@ -1,14 +1,11 @@
 # deepstream
 
-## 测试摄像头
+[NVIDIA DeepStream SDK Developer Guide](https://docs.nvidia.com/metropolis/deepstream/dev-guide/index.html#)
 
-```sh
 
-nvgstcapture-1.0 --orientation 2
+## docker
 
-```
-
-## Install the nvidia-container-toolkit
+### Install the nvidia-container-toolkit
 
 ```sh
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
@@ -24,7 +21,7 @@ sudo docker info | grep nvidia
 
 ```
 
-## Configure docker
+### Configure docker
 
 ```json
 {
@@ -45,10 +42,13 @@ sudo systemctl restart docker
 ```
 
 
-## deeepstream 安装
+###  deeepstream 安装
+
+- ubuntu
 
 ```sh
 
+# obs-rtspserver
 wget -O obs-rtspserver-linux.deb https://github.com/iamscottxu/obs-rtspserver/releases/download/3.0.0/obs-rtspserver-3.0.0-linux.deb
 
 # 
@@ -72,7 +72,15 @@ apt install vim
 
 deepstream-app -c source30_1080p_dec_infer-resnet_tiled_display_int8.txt
 
-#---- nano
+
+```
+
+- Jetson
+
+```sh
+
+#  Jetson 测试摄像头
+nvgstcapture-1.0 --orientation 2
 
 docker pull nvcr.io/nvidia/deepstream-l4t:6.2-samples
 
@@ -85,7 +93,6 @@ bash user_additional_install.sh
 bash install.sh
 
 deepstream-app -c source30_1080p_dec_infer-resnet_tiled_display_int8.txt
-
 ```
 
 **参考**
