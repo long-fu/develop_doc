@@ -1,4 +1,4 @@
-# Deepstream Docker容器方式在nx上运行
+# Deepstream Docker
 
 ## Install the nvidia-container-toolkit
 
@@ -48,19 +48,15 @@ sudo xhost +si:localuser:root
 # 最基础的
 sudo docker run -it --rm --net=host --runtime nvidia  -e DISPLAY=$DISPLAY -w /opt/nvidia/deepstream/deepstream-6.2 -v /tmp/.X11-unix/:/tmp/.X11-unix nvcr.io/nvidia/deepstream-l4t:6.2-base
 
-# docker run --rm -it --network=host aler9/rtsp-simple-server
+# 把推理结果回显到桌面
+sudo docker run -it --rm --net=host --runtime nvidia --device=/dev/video0 -e DISPLAY=$DISPLAY -w /opt/nvidia/deepstream/deepstream-6.2 -v /tmp/.X11-unix/:/tmp/.X11-unix -v /home/admin123/haoshuai/deepstream-6.2:/opt/nvidia/deepstream/deepstream-6.2 nvcr.io/nvidia/deepstream-l4t:6.2-base
 
-# 改造
-docker run --runtime nvidia -it --rm -p 8554:8554 -p 5400:5400 --privileged -v /tmp/argus_socket:/tmp/argus_socket -v /home/admin123/haoshuai/deepstream-6.2:/opt/nvidia/deepstream/deepstream-6.2 --device=/dev/video0 -w /opt/nvidia/deepstream/deepstream-6.2 nvcr.io/nvidia/deepstream-l4t:6.2-base
-
-# 只能在主机上运行
-docker run --runtime nvidia -it --rm -p 8554:8554 -p 5400:5400 --privileged -v /tmp/.X11-unix:/tmp/.X11-unix -v /tmp/argus_socket:/tmp/argus_socket -v /home/admin123/haoshuai/deepstream-6.2:/opt/nvidia/deepstream/deepstream-6.2 -e DISPLAY=$DISPLAY --device=/dev/video0 -w /opt/nvidia/deepstream/deepstream-6.2 nvcr.io/nvidia/deepstream-l4t:6.2-base
-
-docker run --runtime nvidia -it --rm -p 8554:8554 -p 5400:5400 --privileged -v /tmp/.X11-unix:/tmp/.X11-unix -v /tmp/argus_socket:/tmp/argus_socket -v /home/admin123/haoshuai/deepstream-6.2:/opt/nvidia/deepstream/deepstream-6.2 -e DISPLAY=:1 --device=/dev/video0 -w /opt/nvidia/deepstream/deepstream-6.2 nvcr.io/nvidia/deepstream-l4t:6.2-base
+# 不把推理结果显示到桌面 可以保存到文件中或者rtsp流方式
+docker run -it --rm -p 8554:8554 -p 5400:5400 --runtime nvidia -v /tmp/argus_socket:/tmp/argus_socket -v /home/admin123/haoshuai/deepstream-6.2:/opt/nvidia/deepstream/deepstream-6.2 -e DISPLAY=:1 --device=/dev/video0 -w /opt/nvidia/deepstream/deepstream-6.2 nvcr.io/nvidia/deepstream-l4t:6.2-base
 
 # 容器中运行的命名----
-./install.sh
 ./user_additional_install.sh
+./install.sh
 deepstream-app -c samples/configs/deepstream-app/source1_csi_dec_infer_resnet_int8.txt
 # ---- end
 
@@ -136,3 +132,9 @@ kubectl create -f deepstream_not_cmd.yaml
 在边端同一共工作网络中拉流
 
 rtsp://192.168.8.62:8554/ds-test
+
+**参考** 
+
+- [NVIDIA DeepStream SDK Developer Guide](https://docs.nvidia.com/metropolis/deepstream/dev-guide/index.html#)
+
+- [A Docker Container for Jetson](https://docs.nvidia.com/metropolis/deepstream/dev-guide/text/DS_docker_containers.html#a-docker-container-for-jetson)

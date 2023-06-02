@@ -1,22 +1,3 @@
-# 无效
-kind: Service
-apiVersion: v1
-metadata:
-  name: deepstream-service
-spec:
-  ports:
-    - name: rtsp-port
-      port: 8554
-      targetPort: 8554
-    - name: udp-port
-      port: 5400
-      targetPort: 5400
-  selector:
-    app: deepstream-pod
-  type: NodePort
-
----
-
 apiVersion: v1
 kind: Pod
 metadata:
@@ -27,11 +8,8 @@ spec:
   nodeName: admin123-desktop
   containers:
     - name: deepstream-app
-      image: nvcr.io/nvidia/deepstream-l4t:6.2-base
+      image: haoshuai/deepstream-l4t:6.2-samples
       imagePullPolicy: Never
-      workingDir: "/opt/nvidia/deepstream/deepstream-6.2"
-      command: ["/bin/sh"]
-      args: ["run.sh"]
       ports: 
       - containerPort: 8554
         hostPort: 8554
@@ -45,12 +23,8 @@ spec:
         mountPath: /dev/video0
       - name: argus-socket
         mountPath: /tmp/argus_socket
-      - name: deepstream-6
-        mountPath: /opt/nvidia/deepstream/deepstream-6.2
       - name: x11-unix
         mountPath: /tmp/.X11-unix
-      securityContext:
-        privileged: true
   volumes:
     - name: dev-video0
       hostPath:
@@ -58,9 +32,6 @@ spec:
     - name: argus-socket
       hostPath:
         path: /tmp/argus_socket
-    - name: deepstream-6
-      hostPath:
-        path: /home/admin123/haoshuai/deepstream-6.2
     - name: x11-unix
       hostPath:
         path: /tmp/.X11-unix
