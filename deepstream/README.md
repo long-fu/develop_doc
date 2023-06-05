@@ -1,6 +1,6 @@
 # deepstream
 
-[NVIDIA DeepStream SDK Developer Guide](https://docs.nvidia.com/metropolis/deepstream/dev-guide/index.html#)
+
 
 
 ## docker
@@ -108,3 +108,7 @@ deepstream-app -c source30_1080p_dec_infer-resnet_tiled_display_int8.txt
 
 
 - [Jetson nvidia-docker](https://github.com/NVIDIA/nvidia-docker/wiki/NVIDIA-Container-Runtime-on-Jetson)
+
+- [源码编译](https://docs.nvidia.com/tao/tao-toolkit-archive/tao-30-2205/text/ds_tao/dssd_ds.html)
+
+- [NVIDIA DeepStream SDK Developer Guide](https://docs.nvidia.com/metropolis/deepstream/dev-guide/index.html#)
