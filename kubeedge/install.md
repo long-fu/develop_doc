@@ -44,6 +44,13 @@ tar zxvf keadm-v1.12.1-linux-amd64.tar.gz
 chmod +x keadm-v1.12.1-linux-amd64/keadm/keadm
 mv keadm-v1.12.1-linux-amd64/keadm/keadm /usr/local/bin
 
+#----
+
+wget https://github.com/kubeedge/kubeedge/releases/download/v1.12.1/keadm-v1.12.1-linux-arm64.tar.gz
+tar zxvf keadm-v1.12.1-linux-arm64.tar.gz
+chmod +x keadm-v1.12.1-linux-arm64/keadm/keadm
+mv keadm-v1.12.1-linux-arm64/keadm/keadm /usr/local/bin
+
 curl https://get.docker.com | bash
 touch /etc/docker/daemon.json
 echo '{ "registry-mirrors": [ "https://dockerproxy.com" ] }' > /etc/docker/daemon.json
