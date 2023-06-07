@@ -16,3 +16,4 @@ deepstream/deepstream-6.2.zip
 kubernetes/nvidia/deepstream-6.2/*
 deepstream-6.2.zip
 output.mp4
+atl500/Ascend-cann-nnrt_6.0.1_linux-aarch64.run

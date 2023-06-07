@@ -45,3 +45,9 @@ route add default gw 192.168.2.1
 
 # 查看网络配置
 route
+
+# 开发环境配置
+
+source /home/haoshuai/Ascend/ascend-toolkit/set_env.sh
+
+export LD_LIBRARY_PATH=/home/haoshuai/Ascend/ascend-toolkit/latest/x86_64-linux/devlib/:$LD_LIBRARY_PATH
