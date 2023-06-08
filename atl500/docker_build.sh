@@ -1,1 +1,1 @@
-docker build -t haoshuai:v0.0.1 --build-arg NNRT_PKG=Ascend-cann-nnrt_6.0.1_linux-aarch64.run --build-arg DIST_PKG=samples-v0.9.0 .
+docker build -t haoshuai:v0.0.2 --build-arg NNRT_PKG=Ascend-cann-nnrt_6.0.1_linux-aarch64.run .
