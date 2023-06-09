@@ -97,10 +97,11 @@ docker run -it --rm --net=host --privileged \
 -v /home/data/miniD/driver/version.info:/home/data/miniD/driver/version.info \
 -v /home/haoshuai/image-build/samples-v0.9.0:/home/data/samples-v0.9.0 \
 -w /home/data/samples-v0.9.0 \
-7cc78ee309b0 /bin/bash
+haoshuai:v0.0.2 /bin/bash
 
 # 官方的
-docker run -it --rm \
+
+docker run -it --rm --net=host --privileged \
 --device=/dev/davinci0 \
 --device=/dev/davinci_manager \
 --device=/dev/devmm_svm \
@@ -110,4 +111,22 @@ docker run -it --rm \
 -v /etc/ascend_install.info:/etc/ascend_install.info \
 -v /home/data/miniD/driver/version.info:/home/data/miniD/driver/version.info \
 -v /home/haoshuai/image-build/samples-v0.9.0:/home/data/samples-v0.9.0 \
+-w /home/data/samples-v0.9.0 \
 a7574914646d /bin/bash
+
+
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/var/davinci/driver/lib64:/var/davinci/driver/lib64/common:/var/davinci/driver/lib64/driver
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/HwHiAiUser/Ascend/ascend-toolkit/latest/fwkacllib/lib64:/home/HwHiAiUser/Ascend/ascend-toolkit/latest/atc/lib64
+export PYTHONPATH=$PYTHONPATH:/home/HwHiAiUser/Ascend/ascend-toolkit/latest/fwkacllib/python/site-packages:/home/HwHiAiUser/Ascend/ascend-toolkit/latest/toolkit/python/site-packages:/home/HwHiAiUser/Ascend/ascend-toolkit/latest/atc/python/site-packages:/home/HwHiAiUser/Ascend/ascend-toolkit/latest/pyACL/python/site-packages/acl
+export PATH=$PATH:/home/HwHiAiUser/Ascend/ascend-toolkit/latest/fwkacllib/ccec_compiler/bin:/home/HwHiAiUser/Ascend/ascend-toolkit/latest/fwkacllib/bin:/home/HwHiAiUser/Ascend/ascend-toolkit/latest/atc/bin
+export ASCEND_AICPU_PATH=/home/HwHiAiUser/Ascend/ascend-toolkit/latest
+export ASCEND_OPP_PATH=/home/HwHiAiUser/Ascend/ascend-toolkit/latest/opp
+export TOOLCHAIN_HOME=/home/HwHiAiUser/Ascend/ascend-toolkit/latest/toolkit
+
+export PYTHONPATH=$PYTHONPATH:/home/HwHiAiUser/Ascend/ascend-toolkit/latest/fwkacllib/python/site-packages:/home/HwHiAiUser/Ascend/ascend-toolkit/latest/toolkit/python/site-packages:/home/HwHiAiUser/Ascend/ascend-toolkit/latest/atc/python/site-packages:/home/HwHiAiUser/Ascend/ascend-toolkit/latest/pyACL/python/site-packages/acl
+
+python3.6 /home/data/samples-v0.9.0/python/level2_simple_inference/2_object_detection/YOLOV4_coco_detection_car_video/src/yolov4.py
+
+--
+
+/opt/middleware/MindXOM/bin/mount_white_path

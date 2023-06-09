@@ -1,19 +1,11 @@
 FROM ubuntu:18.04
 
-RUN apt-get update 
-#\
-# && apt-get install python3.6 && \ apt-get install python3-pip
-# python3.6 -m pip install --upgrade pip --user -i https://mirrors.huaweicloud.com/repository/pypi/simple && \
-# python3.6 -m pip install Cython numpy tornado==5.1.0 protobuf --user -i https://mirrors.huaweicloud.com/repository/pypi/simple && \
-# apt-get install python3-opencv && \
-# apt-get install -y libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev && \
-# python3.6 -m pip install --upgrade pip && \
-# python3.6 -m pip install Cython && \
-# apt-get install pkg-config libxcb-shm0-dev libxcb-xfixes0-dev && \
-# python3.6 -m pip install av==6.2.0 && \
-# apt-get install libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk && \
-# python3.6 -m pip install numpy && \
-# python3.6 -m pip install Pillow
+RUN apt-get update
+
+COPY install.sh .
+COPY sources.list /etc/apt/
+# RUN sh install.sh && \
+#     rm install.sh
 
 ARG NNRT_PKG
 
