@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ec-dashboard
+
+---
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: harbor
+  namespace: ec-dashboard
+imagePullSecrets:
+- name: harbor-secret
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    k8s-app: ec-dashboard
+  name: ec-dashboard
+  namespace: ec-dashboard
+spec:
+  ports:
+    - port: 8086
+      targetPort: 8086
+  selector:
+    k8s-app: ec-dashboard
+  type: NodePort
+
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  labels:
+    k8s-app: ec-dashboard
+  name: ec-dashboard
+  namespace: ec-dashboard
+spec:
+  selector:
+    matchLabels:
+      k8s-app: ec-dashboard
+  template:
+    metadata:
+      labels:
+        k8s-app: ec-dashboard
+    spec:
+      # nodeSelector:
+      #   ec-app: dashboard
+      nodeName: k8s-work
+      # serviceAccount: harbor
+      imagePullSecrets:
+        - name: harbor-secret
+      containers:
+        - name: ec-dashboard-manager
+          image: 119.23.231.199/test/ec-manager@sha256:e620dfc55662f62b5ff9af7dd58f24072b09bdf6df1f127d1025856ae895afb2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+        - name: ec-dashboard-web
+          image: 119.23.231.199/test/ec-manager-web@sha256:c9f26ec9af7dada94c17ebc5bb5688e33804bc8b587eaaaaa708b79022293997
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8086
+              protocol: TCP

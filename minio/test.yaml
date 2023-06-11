@@ -1,0 +1,18 @@
+apiVersion: shuai.io/v1alpha1
+kind: Inference
+metadata: 
+  name: test-inference
+  # namespace: defulter
+  labels:
+    test: inference
+spec:
+  nodeSelector:
+    app-aa: hjellp
+  nodeName: test-nano
+  models:
+   - name: face
+     model: "image"
+     type: yolov5
+     path: "/data"
+     sha256sum: "kjashdajs"
+     size: 1231288

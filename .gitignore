@@ -2,7 +2,18 @@ kubernetes/todo_list.pdf
 ec-manager-web.tar
 ec-manager.tar
 __pycache__
-.pdf
-.vscode
-.DS_Store
 *.pdf
+*.vscode
+*.DS_Store
+# Harbor/harbor
+*.tgz
+*.tar
+*.tgz
+CPP/main
+kubernetes/api
+deepstream/deepstream-6.2/*
+deepstream/deepstream-6.2.zip
+kubernetes/nvidia/deepstream-6.2/*
+deepstream-6.2.zip
+output.mp4
+atl500/Ascend-cann-nnrt_6.0.1_linux-aarch64.run
