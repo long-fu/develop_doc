@@ -79,6 +79,8 @@ docker rmi --force $(docker images -q)
 # 例如删除包含“some”的镜像
 docker rmi --force $(docker images | grep goharbor | awk '{print $3}')
 
+docker rmi --force $(docker images | grep goharbor | awk '{print $3}')
+
 docker rmi --force $(docker images | grep none | awk '{print $3}')
 
 ```

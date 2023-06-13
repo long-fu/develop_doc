@@ -101,18 +101,28 @@ haoshuai:v0.0.2 /bin/bash
 
 # 官方的
 
-docker run -it --rm --net=host --privileged \
+需要改造挂载路径
+
+docker run -it --rm --net=host --privileged -u root \
 --device=/dev/davinci0 \
 --device=/dev/davinci_manager \
 --device=/dev/devmm_svm \
 --device=/dev/hisi_hdc \
+-v /usr/local/dcmi:/usr/local/dcmi \
+-v /var/log/npu:/var/log/npu \
+-v /home/data/miniD/driver/driver:/usr/local/Ascend/driver \
+-v /usr/slog:/usr/slog \
 -v /usr/local/bin/npu-smi:/usr/local/bin/npu-smi:ro \
--v /home/data/miniD/driver/lib64:/home/data/miniD/driver/lib64:ro \
--v /etc/ascend_install.info:/etc/ascend_install.info \
--v /home/data/miniD/driver/version.info:/home/data/miniD/driver/version.info \
--v /home/haoshuai/image-build/samples-v0.9.0:/home/data/samples-v0.9.0 \
--w /home/data/samples-v0.9.0 \
-a7574914646d /bin/bash
+-v /home/data/miniD/driver/lib64:/usr/local/Ascend/driver/lib64:ro \
+-v /home/data/miniD/driver/tools/:/usr/local/Ascend/driver/tools/ \
+-v /home/data/miniD/driver/add-ons/:/usr/local/Ascend/add-ons/ \
+-v /data:/data \
+-v /home/haoshuai/modelzoo_yolov5:/home/data/modelzoo_yolov5 \
+-w /home/data/modelzoo_yolov5 \
+ascendhub.huawei.com/public-ascendhub/infer-modelzoo:22.0.0 \
+/bin/bash
+
+python3 om_val.py --tag 6.0 --model=yolov5s_bs4.om --nms_mode nms_script --batch_size=4
 
 
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/var/davinci/driver/lib64:/var/davinci/driver/lib64/common:/var/davinci/driver/lib64/driver
