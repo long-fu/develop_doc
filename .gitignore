@@ -9,3 +9,13 @@ __pycache__
 *.tgz
 *.tar
 *.tgz
+CPP/main
+kubernetes/api
+deepstream/deepstream-6.2/*
+deepstream/deepstream-6.2.zip
+kubernetes/nvidia/deepstream-6.2/*
+deepstream-6.2.zip
+output.mp4
+atl500/Ascend-cann-nnrt_6.0.1_linux-aarch64.run
+atl500/小站配置.zip
+atl500/样例运行配置.zip

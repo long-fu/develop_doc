@@ -6,6 +6,14 @@ import json
 class MainHandler(web.RequestHandler):
     def post(self):
         self.write("Hello, world")
+
+class TestHandler(web.RequestHandler):
+    def post(self):
+        data = json.loads(self.request.body)
+        print("接收的数据",data)
+        # self.set_status(200)
+        self.write(data)
+        # self.finish()
     
 class DeleteModelHandler(web.RequestHandler):
     def post(self):
@@ -39,13 +47,14 @@ class ModelStatusHandler(web.RequestHandler):
 def make_app():
     return web.Application([
         (r"/", MainHandler),
+        (r"/api/smartbox/AlarmPost", TestHandler),
         (r"/modelSpec",ModelSpecHandler),
         (r"/modelStatus",ModelStatusHandler)
     ])
 
 async def main():
     app = make_app()
-    app.listen(9999)
+    app.listen(8080)
     await asyncio.Event().wait()
 
 if __name__ == "__main__":

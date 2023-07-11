@@ -161,6 +161,8 @@ https://119.23.231.199/
 
 默认账号密码：`admin` `Harbor12345`
 
+`Pass01:).`
+
 创建一个私有的仓库 test
 
 ```sh
@@ -173,6 +175,8 @@ docker login hub.ec.com
 
 docker push hub.ec.com/test/ec-manager:v0.0.1
 ```
+<<<<<<< HEAD:Harbor/README.MD
+=======
 docker tag ec-manager-0.0.1:latest 119.23.231.199:80/test/ec-manager:v0.0.2
 
 docker tag hub.docker.haoshuai.com/test/ec-manager:v0.0.3 119.23.231.199/test/ec-manager:v0.0.3
@@ -199,6 +203,7 @@ docker push 119.23.231.199:80/test/ec-manager-web:v0.0.2
 
 docker push hub.ec.com/test/ec-manager-web:v0.0.2
 ```
+>>>>>>> origin/main:harbor/README.MD
 
 ## 登陆失败 要拷贝ca证书 也就是开始的验证证书 拷贝到响应的目录
 

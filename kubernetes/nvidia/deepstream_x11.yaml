@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: deepstream-pod
+  labels:
+    app: deepstream-pod
+spec:
+  nodeName: admin123-desktop
+  containers:
+    - name: deepstream-app
+      image: haoshuai/deepstream-l4t:6.2-samples
+      imagePullPolicy: Never
+      ports: 
+      - containerPort: 8554
+        hostPort: 8554
+      - containerPort: 5400
+        hostPort: 5400
+      env: 
+        - name: DISPLAY
+          value: ":1"
+      volumeMounts:
+      - name: dev-video0
+        mountPath: /dev/video0
+      - name: argus-socket
+        mountPath: /tmp/argus_socket
+      - name: x11-unix
+        mountPath: /tmp/.X11-unix
+  volumes:
+    - name: dev-video0
+      hostPath:
+        path: /dev/video0
+    - name: argus-socket
+      hostPath:
+        path: /tmp/argus_socket
+    - name: x11-unix
+      hostPath:
+        path: /tmp/.X11-unix

@@ -3,6 +3,7 @@
 from minio import Minio
 from minio.error import S3Error
 import json
+import os
 
 def main():
     # Create a client with the MinIO server playground, its access key
@@ -13,14 +14,14 @@ def main():
         secret_key="F4X1wp0JG7dz6V6kBWo14n7n8mzogLol",
         secure = False
     )
-    events = client.listen_bucket_notification("test")
+    # events = client.listen_bucket_notification("test")
     # events = client.listen_bucket_notification('my-bucket', 'my-prefix/',
     #                                        '.my-suffix',
     #                                        ['s3:ObjectCreated:*',
     #                                         's3:ObjectRemoved:*',
     #                                         's3:ObjectAccessed:*'])
-    for event in events:
-        print(event)
+    # for event in events:
+    #     print(event)
 
     # bs = client.list_buckets()
     # for i in bs:
@@ -40,7 +41,7 @@ def main():
     # print(json.load(info))
     # print(json.dumps(info))
     
-    return
+    # return
     
     # Make 'asiatrip' bucket if not exist.
     found = client.bucket_exists("test")
@@ -52,16 +53,43 @@ def main():
     # Upload '/home/user/Photos/asiaphotos.zip' as object name
     # 'asiaphotos-2015.zip' to bucket 'asiatrip'.
     client.fput_object(
-        "test", "ec-manager-0419.tar", "/home/haoshuai/code/develop_doc/ec-manager.tar",
+        "test", "minio/test.yaml", "/home/haoshuai/code/develop_doc/minio/test.yaml",
     )
+
+    # 上传文件夹
+    # folder_path = ""
+    # files = os.listdir(folder_path)
+
     print(
         "'/home/haoshuai/code/develop_doc/ec-manager.tar' is successfully uploaded as "
         "object 'ec-manager-0419.tar' to bucket 'test'."
     )
 
+allfiles = []
+
+def getAllFiles(path, path_1):
+    childFiles = os.listdir(path)
+    for file in childFiles:
+        filepath = os.path.join(path, file)
+        if os.path.isdir(filepath):
+            getAllFiles(filepath, path_1 + file + "/")
+        else:
+            # 打印出完整的绝对路径
+            print(path_1 + file)
+    return
 
 if __name__ == "__main__":
-    try:
-        main()
-    except S3Error as exc:
-        print("error occurred.", exc)
+    folder_path = "/home/haoshuai/code/develop_doc/minio"
+    rec = getAllFiles(folder_path,"")
+    # print(rec)
+    # for j in rec:
+    #     if j == None:
+    #         break
+    #     print(j)
+    # files = os.listdir(folder_path)
+    # for file in files :
+    #     print(file)
+    # try:
+    #     main()
+    # except S3Error as exc:
+    #     print("error occurred.", exc)
