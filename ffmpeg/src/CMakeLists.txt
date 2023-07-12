@@ -6,7 +6,7 @@ enable_testing()
 
 include_directories("/usr/include/x86_64-linux-gnu")
 
-add_executable(ffmpeg_main main.cpp)
+add_executable(ffmpeg_main push.cpp)
 
 target_link_libraries(ffmpeg_main libavutil.so libavcodec.so libavformat.so libswscale.so )
 

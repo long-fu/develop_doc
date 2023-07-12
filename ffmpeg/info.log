@@ -122,3 +122,248 @@ Failed to parse interval end specification ''
 [INFO]  Start decode frame of video rtsp://192.168.2.4:8554/mask0.264 ...
 [NULL @ 0xffff580042c0] nal_unit_type: 7(SPS), nal_ref_idc: 3
 [NULL @ 0xffff580042c0] nal_unit_type: 8(PPS), nal_ref_idc: 3
+
+----- ok
+
+{
+Input #0, rtsp, from 'rtsp://127.0.0.1:8554/mask0.264':
+  Metadata:
+    title           : H.264 Video, streamed by the LIVE555 Media Server
+    comment         : mask0.264
+  Duration: N/A, start: 0.040000, bitrate: N/A
+  Stream #0:0: Video: h264 (High), yuv420p(tv, bt709, progressive), 1920x1080, 25 fps, 25 tbr, 90k tbn
+    "streams": [
+        {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "High",
+            "codec_type": "video",
+            "codec_tag_string": "[0][0][0][0]",
+            "codec_tag": "0x0000",
+            "width": 1920,
+            "height": 1080,
+            "coded_width": 1920,
+            "coded_height": 1080,
+            "closed_captions": 0,
+            "film_grain": 0,
+            "has_b_frames": 2,
+            "pix_fmt": "yuv420p",
+            "level": 40,
+            "color_range": "tv",
+            "color_space": "bt709",
+            "color_transfer": "bt709",
+            "color_primaries": "bt709",
+            "chroma_location": "left",
+            "field_order": "progressive",
+            "refs": 1,
+            "is_avc": "false",
+            "nal_length_size": "0",
+            "r_frame_rate": "25/1",
+            "avg_frame_rate": "25/1",
+            "time_base": "1/90000",
+            "start_pts": 3600,
+            "start_time": "0.040000",
+            "bits_per_raw_sample": "8",
+            "extradata_size": 42,
+            "disposition": {
+                "default": 0,
+                "dub": 0,
+                "original": 0,
+                "comment": 0,
+                "lyrics": 0,
+                "karaoke": 0,
+                "forced": 0,
+                "hearing_impaired": 0,
+                "visual_impaired": 0,
+                "clean_effects": 0,
+                "attached_pic": 0,
+                "timed_thumbnails": 0,
+                "captions": 0,
+                "descriptions": 0,
+                "metadata": 0,
+                "dependent": 0,
+                "still_image": 0
+            }
+        }
+    ],
+    "format": {
+        "filename": "rtsp://127.0.0.1:8554/mask0.264",
+        "nb_streams": 1,
+        "nb_programs": 0,
+        "format_name": "rtsp",
+        "format_long_name": "RTSP input",
+        "start_time": "0.040000",
+        "probe_score": 100,
+        "tags": {
+            "title": "H.264 Video, streamed by the LIVE555 Media Server",
+            "comment": "mask0.264"
+        }
+    }
+}
+
+
+---
+
+Input #0, rtsp, from 'rtsp://127.0.0.1:8554/mystream':
+  Metadata:
+    title           : Stream
+  Duration: N/A, start: 0.107744, bitrate: N/A
+  Stream #0:0: Video: h264 (High), yuv420p(tv, bt709, progressive), 3840x2160, 24 fps, 24 tbr, 90k tbn
+    "streams": [
+        {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "High",
+            "codec_type": "video",
+            "codec_tag_string": "[0][0][0][0]",
+            "codec_tag": "0x0000",
+            "width": 3840,
+            "height": 2160,
+            "coded_width": 3840,
+            "coded_height": 2160,
+            "closed_captions": 0,
+            "film_grain": 0,
+            "has_b_frames": 2,
+            "pix_fmt": "yuv420p",
+            "level": 52,
+            "color_range": "tv",
+            "color_space": "bt709",
+            "color_transfer": "bt709",
+            "color_primaries": "bt709",
+            "chroma_location": "left",
+            "field_order": "progressive",
+            "refs": 1,
+            "is_avc": "false",
+            "nal_length_size": "0",
+            "r_frame_rate": "24/1",
+            "avg_frame_rate": "24/1",
+            "time_base": "1/90000",
+            "start_pts": 9697,
+            "start_time": "0.107744",
+            "bits_per_raw_sample": "8",
+            "extradata_size": 42,
+            "disposition": {
+                "default": 0,
+                "dub": 0,
+                "original": 0,
+                "comment": 0,
+                "lyrics": 0,
+                "karaoke": 0,
+                "forced": 0,
+                "hearing_impaired": 0,
+                "visual_impaired": 0,
+                "clean_effects": 0,
+                "attached_pic": 0,
+                "timed_thumbnails": 0,
+                "captions": 0,
+                "descriptions": 0,
+                "metadata": 0,
+                "dependent": 0,
+                "still_image": 0
+            }
+        }
+    ],
+    "format": {
+        "filename": "rtsp://127.0.0.1:8554/mystream",
+        "nb_streams": 1,
+        "nb_programs": 0,
+        "format_name": "rtsp",
+        "format_long_name": "RTSP input",
+        "start_time": "0.107744",
+        "probe_score": 100,
+        "tags": {
+            "title": "Stream"
+        }
+    }
+}
+
+----
+
+mediaServer git:(master) ✗ ffprobe -show_format -show_streams -of json rtsp://admin:ad123456@192.168.137.50:554/h264
+ffprobe version 6.0 Copyright (c) 2007-2023 the FFmpeg developers
+  built with gcc 11 (Ubuntu 11.3.0-1ubuntu1~22.04.1)
+  configuration: --enable-shared --enable-swscale --enable-gpl --enable-nonfree --enable-pic --enable-postproc --enable-pthreads --enable-static --enable-libx264
+  libavutil      58.  2.100 / 58.  2.100
+  libavcodec     60.  3.100 / 60.  3.100
+  libavformat    60.  3.100 / 60.  3.100
+  libavdevice    60.  1.100 / 60.  1.100
+  libavfilter     9.  3.100 /  9.  3.100
+  libswscale      7.  1.100 /  7.  1.100
+  libswresample   4. 10.100 /  4. 10.100
+  libpostproc    57.  1.100 / 57.  1.100
+{
+Input #0, rtsp, from 'rtsp://admin:ad123456@192.168.137.50:554/h264':
+  Metadata:
+    title           : Media Presentation
+  Duration: N/A, start: 0.040000, bitrate: N/A
+  Stream #0:0: Video: h264 (Main), yuvj420p(pc, bt709, progressive), 1280x720, 25 fps, 25.08 tbr, 90k tbn
+    "streams": [
+        {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "Main",
+            "codec_type": "video",
+            "codec_tag_string": "[0][0][0][0]",
+            "codec_tag": "0x0000",
+            "width": 1280,
+            "height": 720,
+            "coded_width": 1280,
+            "coded_height": 720,
+            "closed_captions": 0,
+            "film_grain": 0,
+            "has_b_frames": 0,
+            "pix_fmt": "yuvj420p",
+            "level": 31,
+            "color_range": "pc",
+            "color_space": "bt709",
+            "color_transfer": "bt709",
+            "color_primaries": "bt709",
+            "chroma_location": "left",
+            "field_order": "progressive",
+            "refs": 1,
+            "is_avc": "false",
+            "nal_length_size": "0",
+            "r_frame_rate": "301/12",
+            "avg_frame_rate": "25/1",
+            "time_base": "1/90000",
+            "start_pts": 3600,
+            "start_time": "0.040000",
+            "bits_per_raw_sample": "8",
+            "extradata_size": 36,
+            "disposition": {
+                "default": 0,
+                "dub": 0,
+                "original": 0,
+                "comment": 0,
+                "lyrics": 0,
+                "karaoke": 0,
+                "forced": 0,
+                "hearing_impaired": 0,
+                "visual_impaired": 0,
+                "clean_effects": 0,
+                "attached_pic": 0,
+                "timed_thumbnails": 0,
+                "captions": 0,
+                "descriptions": 0,
+                "metadata": 0,
+                "dependent": 0,
+                "still_image": 0
+            }
+        }
+    ],
+    "format": {
+        "filename": "rtsp://admin:ad123456@192.168.137.50:554/h264",
+        "nb_streams": 1,
+        "nb_programs": 0,
+        "format_name": "rtsp",
+        "format_long_name": "RTSP input",
+        "start_time": "0.040000",
+        "probe_score": 100,
+        "tags": {
+            "title": "Media Presentation"
+        }
+    }
+}
