@@ -14,7 +14,7 @@ bluenviron/mediamtx
 #udp
 ffmpeg -re -stream_loop -1 -i video0.mp4 -c copy -f rtsp rtsp://127.0.0.1:8554/mystream
 
-ffmpeg -re -stream_loop -1 -i person0.264 -c copy -f rtsp -rtsp_transport tcp rtsp://127.0.0.1:8554/mystream
+ffmpeg -re -stream_loop -1 -i person0.mp4 -c copy -f rtsp -rtsp_transport tcp rtsp://127.0.0.1:8554/mystream
 
 ffmpeg -re -stream_loop -1 -i mask0.mp4 -c copy -f rtsp -rtsp_transport tcp rtsp://127.0.0.1:8554/mystream
 
@@ -38,6 +38,8 @@ ffmpeg -re -i mask0.264 -c copy mask0.mp4
 ffprobe -show_format -show_streams -of json rtsp://127.0.0.1:8554/mystream
 
 ffprobe -show_format -show_streams -of json rtsp://127.0.0.1:8554/mask0.264
+
+ffprobe -show_format -show_streams -of json rtmp://192.168.2.4:1935/live0
 
 ffprobe -show_format -show_streams -of json rtsp://admin:ad123456@192.168.137.50:554/h264
 

@@ -7,6 +7,7 @@
 导出镜像
 
 ```sh
+## 导出快照
 # 导出 容器 快照  == 不要用这种方式 导出镜像
 docker export 7691a814370e > ubuntu.tar
 #导入
@@ -14,6 +15,8 @@ cat t-eio-manager-0.0.1.tar | docker import - t-eio/ec-manager:v0.0.1
 
 cat t-eio-web-0.0.1.tar | docker import - t-eio/ec-manager-web:v0.0.1
 
+# 导出镜像
+# 直接是导出镜像
 docker save ec-manager-web:v0.0.1 > ec-manager-web.tar
 
 # 导入api镜像
