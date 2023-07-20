@@ -7,6 +7,7 @@
 导出镜像
 
 ```sh
+## 导出快照
 # 导出 容器 快照  == 不要用这种方式 导出镜像
 docker export 7691a814370e > ubuntu.tar
 #导入
@@ -14,6 +15,8 @@ cat t-eio-manager-0.0.1.tar | docker import - t-eio/ec-manager:v0.0.1
 
 cat t-eio-web-0.0.1.tar | docker import - t-eio/ec-manager-web:v0.0.1
 
+# 导出镜像
+# 直接是导出镜像
 docker save ec-manager-web:v0.0.1 > ec-manager-web.tar
 
 # 导入api镜像
@@ -29,7 +32,7 @@ docker run -d -P --add-host=k8s-vip:120.79.183.159 t-eio-manager-0.0.1
 
 docker run -d -P t-eio-web-0.0.1
 # 进入运行的docker镜像中 并且用sh命令交互
-docker exec -it b2f73d901244 /bin/bash
+docker exec -it 7742beef2775 /bin/bash
 
 kubectl exec -it -nt-eio-dashboard t-eio-dashboard-5b5fd996f4-h8qlr --container  /bin/bash
 

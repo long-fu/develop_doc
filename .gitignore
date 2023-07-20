@@ -19,3 +19,4 @@ output.mp4
 atl500/Ascend-cann-nnrt_6.0.1_linux-aarch64.run
 atl500/小站配置.zip
 atl500/样例运行配置.zip
+build/
