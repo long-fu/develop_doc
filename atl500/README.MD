@@ -208,12 +208,12 @@ bash /usr/local/Ascend/nnrt/set_env.sh
 
 # 以安装用户在任意目录下执行以下命令，打开.bashrc文件。
 vi ~/.bashrc  
-# 在文件最后一行后面添加如下内容。
-export CPU_ARCH='arch'
-export THIRDPART_PATH=/usr/local/Ascend/thirdpart/${CPU_ARCH}  #代码编译时链接samples所依赖的相关库文件
-export LD_LIBRARY_PATH=${THIRDPART_PATH}/lib:$LD_LIBRARY_PATH  #运行时链接库文件
-export INSTALL_DIR=/usr/local/Ascend/ascend-toolkit/latest #CANN软件安装后的文件存储路径，根据安装目录自行修改
-# 执行命令保存文件并退出。
+
+export CPU_ARCH='aarch64'
+export THIRDPART_PATH=/usr/local/Ascend/thirdpart/${CPU_ARCH}
+export LD_LIBRARY_PATH=${THIRDPART_PATH}/lib:$LD_LIBRARY_PATH 
+export INSTALL_DIR=/usr/local/Ascend/ascend-toolkit/latest
+
 :wq!  
 # 执行命令使其立即生效。 
 source ~/.bashrc 
