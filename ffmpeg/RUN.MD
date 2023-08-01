@@ -194,8 +194,23 @@ ffprobe -show_format -show_streams -of json person0_out.mp4
 ffmpeg -re -stream_loop -1 -i person0_out.mp4 -c copy -f rtsp -rtsp_transport tcp rtsp://127.0.0.1:8554/mystream
 
 ffprobe -show_format -show_streams -of json rtsp://127.0.0.1:8554/mystream
+
+
+
 #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 3840x2160, 10994 kb/s, 24 fps, 24 tbr, 12288 tbn (default)
 
+faile
+Stream #0:0: Video: hevc (Main), yuvj420p(pc, bt709), 1280x720, 25 fps, 25 tbr, 90k tbn, 25 tbc
+"codec_name": "hevc",
+"codec_long_name": "H.265 / HEVC (High Efficiency Video Coding)",
+
+Stream #0:0: Video: h264 (Main), yuvj420p(pc, bt709, progressive), 1280x720, 25 fps, 25 tbr, 90k tbn, 50 tbc
+
+
+success
+Stream #0:0: Video: h264 (Main), yuvj420p(pc, bt709, progressive), 1280x720, 25 fps, 25 tbr, 90k tbn, 50 tbc
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
 ```
 
 

@@ -10,7 +10,7 @@ Atlas 500 智能小站 用户指南 (型号 3000) 18 https://support.huawei.com/
 
 - [所有手册](https://support.huawei.com/enterprise/zh/ascend-computing/a500-3000-pid-250702836)
 
-## 开发配置
+## 小站配置
 
 1. 外网访问配置
 

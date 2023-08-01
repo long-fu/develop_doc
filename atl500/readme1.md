@@ -41,52 +41,99 @@ docker run -it --net=host --privileged -u root \
 ascendhub.huawei.com/public-ascendhub/infer-modelzoo:22.0.0 \
 /bin/bash
 
-docker run -it --net=host --privileged -u root \
---device=/dev/davinci0 \
---device=/dev/davinci_manager \
---device=/dev/devmm_svm \
---device=/dev/hisi_hdc \
--v /usr/local/dcmi:/usr/local/dcmi \
--v /var/log/npu:/var/log/npu \
--v /home/data/miniD/driver/driver:/usr/local/Ascend/driver \
--v /usr/slog:/usr/slog \
--v /usr/local/bin/npu-smi:/usr/local/bin/npu-smi:ro \
--v /home/data/miniD/driver/lib64:/usr/local/Ascend/driver/lib64:ro \
--v /home/data/miniD/driver/tools/:/usr/local/Ascend/driver/tools/ \
--v /home/data/miniD/driver/add-ons/:/usr/local/Ascend/add-ons/ \
--v /data:/data \
--v /home/zhonghang/core:/home/data/core \
--w /home/data/core \
-ascendhub.huawei.com/public-ascendhub/infer-modelzoo:22.0.0 \
-/bin/bash
+# 容器中运行命令
 
-docker run -it --net=host --privileged -u root \
---device=/dev/davinci0 \
---device=/dev/davinci_manager \
---device=/dev/devmm_svm \
---device=/dev/hisi_hdc \
--v /usr/local/dcmi:/usr/local/dcmi \
--v /var/log/npu:/var/log/npu \
--v /home/data/miniD/driver/driver:/usr/local/Ascend/driver \
--v /usr/slog:/usr/slog \
--v /usr/local/bin/npu-smi:/usr/local/bin/npu-smi:ro \
--v /home/data/miniD/driver/lib64:/usr/local/Ascend/driver/lib64:ro \
--v /home/data/miniD/driver/tools/:/usr/local/Ascend/driver/tools/ \
--v /home/data/miniD/driver/add-ons/:/usr/local/Ascend/add-ons/ \
--v /data:/data \
--v /home/zhonghang/core:/home/data/core \
--w /home/data/core \
-infer-modelzoo:v22.0.2 \
-/bin/bash
 
-# 以安装用户在开发环境任意目录下执行以下命令，打开.bashrc文件。
+chmod 1777 /tmp
+
+apt-get update
+
+bash /usr/local/Ascend/ascend-toolkit/set_env.sh
+
+./Ascend-cann-nnrt_6.0.1_linux-aarch64.run --quiet --install
+# [NNRT] [20230615-08:36:53] [INFO] Please make sure that:
+# LD_LIBRARY_PATH includes :
+# 	/usr/local/Ascend/nnrt/latest/lib64:
+# PYTHONPATH includes :
+# 	/usr/local/Ascend/nnrt/latest/python/site-packages:
+# ASCEND_AICPU_PATH includes :
+# 	/usr/local/Ascend/nnrt/latest:
+# ASCEND_OPP_PATH includes :
+# 	/usr/local/Ascend/nnrt/latest/opp:
+bash /usr/local/Ascend/nnrt/set_env.sh
+
+
+# 以安装用户在任意目录下执行以下命令，打开.bashrc文件。
 vi ~/.bashrc  
-# 在文件最后一行后面添加如下内容。CPU_ARCH环境变量请根据运行环境cpu架构填写，如export CPU_ARCH=aarch64
-export CPU_ARCH=aarch64
-# THIRDPART_PATH需要按照运行环境安装路径设置，如运行环境为arm，指定安装路径为Ascend-arm，则需要设置为export THIRDPART_PATH=${HOME}/Ascend-arm/thirdpart/${CPU_ARCH}
-export THIRDPART_PATH=${HOME}/Ascend/thirdpart/${CPU_ARCH}  #代码编译时链接第三方库
-# CANN软件安装后文件存储路径，最后一级目录请根据运行环境设置，运行环境为arm，这里填arm64-linux；运行环境为x86，则这里填x86_64-linux，以下以arm环境为例
-export INSTALL_DIR=${HOME}/Ascend/ascend-toolkit/latest/arm64-linux
+
+export CPU_ARCH='aarch64'
+export THIRDPART_PATH=/usr/local/Ascend/thirdpart/${CPU_ARCH}
+export LD_LIBRARY_PATH=${THIRDPART_PATH}/lib:$LD_LIBRARY_PATH 
+export INSTALL_DIR=/usr/local/Ascend/ascend-toolkit/latest
+
+:wq!  
+# 执行命令使其立即生效。 
+source ~/.bashrc 
+# 创建第samples相关依赖文件夹
+mkdir -p ${THIRDPART_PATH}
+# 下载源码并安装git
+cd ${HOME}
+apt-get install git
+git clone https://gitee.com/ascend/samples.git
+# 拷贝公共文件到samples相关依赖路径中
+cp -r ${HOME}/samples/common ${THIRDPART_PATH}
+
+sudo apt-get install libopencv-dev
+
+# 下载x264
+cd ${HOME}
+git clone https://code.videolan.org/videolan/x264.git
+cd x264
+
+# 安装x264
+./configure --enable-shared --disable-asm
+make
+sudo make install
+sudo cp /usr/local/lib/libx264.so.164 /lib
+
+#apt-get install ffmpeg 版本太低 不行
+
+# 下载ffmpeg
+cd ${HOME}
+wget http://www.ffmpeg.org/releases/ffmpeg-4.1.3.tar.gz --no-check-certificate
+tar -zxvf ffmpeg-4.1.3.tar.gz
+cd ffmpeg-4.1.3
+
+# 安装ffmpeg
+./configure --enable-shared --enable-pic --enable-static --disable-x86asm --enable-libx264 --enable-gpl --prefix=${THIRDPART_PATH}
+make -j8
+make install
+
+# 编译并安装acllite
+cd ${HOME}/samples/cplusplus/common/acllite/
+make
+make install
+
+
+# 安装protobuf相关依赖
+sudo apt-get install autoconf automake libtool
+# 下载protobuf源码
+cd ${HOME}
+git clone -b 3.13.0 https://gitee.com/mirrors/protobufsource.git protobuf
+# 编译安装protobuf
+cd protobuf
+./autogen.sh
+./configure --prefix=${THIRDPART_PATH}
+make clean
+make -j8
+sudo make install
+# 进入presentagent源码目录并编译
+cd ${HOME}/samples/cplusplus/common/presenteragent/proto
+${THIRDPART_PATH}/bin/protoc presenter_message.proto --cpp_out=./
+# 开始编译presentagnet
+cd ..
+make -j8
+make install
 
 ```
 
