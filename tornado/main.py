@@ -4,7 +4,7 @@ import tornado.web as web
 import json
 
 class MainHandler(web.RequestHandler):
-    def post(self):
+    def get(self):
         self.write("Hello, world")
 
 class TestHandler(web.RequestHandler):

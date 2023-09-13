@@ -14,6 +14,12 @@
 ## 偏移
 
 ```sh
+KAFKA_CLUSTER_ID="$(bin/kafka-storage.sh random-uuid)"
+
+bin/kafka-storage.sh format -t $KAFKA_CLUSTER_ID -c config/kraft/server.properties
+
+bin/kafka-server-start.sh config/kraft/server.properties
+
 # 创建topic
 bin/kafka-topics.sh --create --topic test-events --bootstrap-server localhost:9092
 
@@ -32,7 +38,9 @@ bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --grou
 
 
 # 生产者
-bin/kafka-console-producer.sh --topic haoshuai-events --bootstrap-server localhost:9092
+bin/kafka-console-producer.sh --topic quickstart-events --bootstrap-server localhost:9092
+
+bin/kafka-console-producer.sh --topic quickstart-events --bootstrap-server localhost:9092
 
 # 消费者
 bin/kafka-console-consumer.sh --topic quickstart-events --from-beginning --bootstrap-server localhost:9092
