@@ -20,3 +20,8 @@ atl500/Ascend-cann-nnrt_6.0.1_linux-aarch64.run
 atl500/小站配置.zip
 atl500/样例运行配置.zip
 build/
+jx/aarch64-install
+jx/arm_bin
+jx/arm-install
+jx/compressed
+jx/source
