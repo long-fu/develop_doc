@@ -1,13 +1,13 @@
 #!/bin/sh
 
 BASE=`pwd`
-BUILD_HOST=aarch64-linux-gnu
+BUILD_HOST=aarch64-none-linux-gnu
 OUTPUT_PATH=${BASE}/aarch64-install
 
 OTHER_LIB=${OUTPUT_PATH}/all_without_ffmpeg
 
 set_env(){
-	export CROSS_COMPILE=aarch64-linux-gnu-
+	export CROSS_COMPILE=aarch64-none-linux-gnu-
 	AS=${CROSS_COMPILE}as
 	AR=${CROSS_COMPILE}ar
 	NM=${CROSS_COMPILE}nm
@@ -18,7 +18,7 @@ set_env(){
 	RANLIB=${CROSS_COMPILE}ranlib
 	STRIP=${CROSS_COMPILE}strip
 	export AS AR NM CC GG LD RANLIB STRIP
-	export PATH=$PATH:/usr/aarch64-linux-gnu/bin
+	export PATH=$PATH:/usr/local/ARM-toolchain/gcc-arm-9.2-2019.12-x86_64-aarch64-none-linux-gnu/bin
 }
 
 make_dirs () {
@@ -40,8 +40,8 @@ download_package () {
     cd ${BASE}/compressed
     tget https://code.videolan.org/videolan/x264/-/archive/stable/x264-stable.tar.gz
     tget https://ffmpeg.org/releases/ffmpeg-5.0.tar.gz
-    tget http://download.videolan.org/videolan/x265/x265_3.2.tar.gz
-	tget http://www.libsdl.org/release/SDL2-2.0.22.tar.gz
+    # tget http://download.videolan.org/videolan/x265/x265_3.2.tar.gz
+	# tget http://www.libsdl.org/release/SDL2-2.0.22.tar.gz
 	tget https://download.savannah.gnu.org/releases/freetype/freetype-2.13.2.tar.gz
 	# tget https://download.savannah.gnu.org/releases/freetype/freetype-2.12.0.tar.gz
 	# tget https://download.savannah.gnu.org/releases/freetype/freetype-2.10.0.tar.gz
