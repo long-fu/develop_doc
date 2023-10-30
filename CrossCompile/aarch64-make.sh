@@ -39,7 +39,8 @@ tget () { #try wget
 download_package () {
     cd ${BASE}/compressed
     tget https://code.videolan.org/videolan/x264/-/archive/stable/x264-stable.tar.gz
-    tget https://ffmpeg.org/releases/ffmpeg-5.0.tar.gz
+    tget https://ffmpeg.org/releases/ffmpeg-4.1.3.tar.gz
+	tget https://codeload.github.com/opencv/opencv/zip/refs/tags/3.4.16.zip
     # tget http://download.videolan.org/videolan/x265/x265_3.2.tar.gz
 	# tget http://www.libsdl.org/release/SDL2-2.0.22.tar.gz
 	tget https://download.savannah.gnu.org/releases/freetype/freetype-2.13.2.tar.gz
@@ -98,7 +99,7 @@ make_harfbuzz() {
 	cd ${BASE}/source/harfbuzz*
 	
 	./configure \
-	CC=aarch64-linux-gnu-gcc \
+	CC=${BUILD_HOST}-gcc \
 	--host=arm-linux \
 	--prefix=${OUTPUT_PATH}/harfbuzz \
 	--enable-shared \
@@ -112,7 +113,7 @@ make_freetype() {
 	cd ${BASE}/source/freetype*
 	
 	./configure \
-	CC=aarch64-linux-gnu-gcc \
+	CC=${BUILD_HOST}-gcc \
 	--host=arm-linux \
 	--prefix=${OUTPUT_PATH}/freetype \
 	--enable-shared \
@@ -166,16 +167,18 @@ make_x265() {
 }
 
 make_opencv() {
-	cd ${BASE}/source/opencv*
+	cd ${BASE}/source/opencv-4.5.5
 	rm -rf build
+	mkdir build
 	cd build
 	cmake \
 	-DCMAKE_INSTALL_PREFIX=../aarch_64_install \
 	-DWITH_CUDA=OFF \
 	-DENABLE_PRECOMPILED_HEADERS=OFF \
 	-DCMAKE_TOOLCHAIN_FILE=../platforms/linux/aarch64-gnu.toolchain.cmake \
-	-DCUDA_GENERATION=Kepler ..
-	make
+	-DCUDA_GENERATION=Kepler \
+	..
+	make -j$(nproc)
 	make install
 }
 
@@ -207,7 +210,7 @@ make_ffmpeg() {
     cd ${BASE}/source/ffmpeg*
 	make clean
 	./configure \
-	--prefix=${OUTPUT_PATH}/ffmpeg5.0 \
+	--prefix=${OUTPUT_PATH}/ffmpeg4.1.3 \
 	--extra-cflags=-I${OTHER_LIB}/include \
 	--extra-ldflags=-L${OTHER_LIB}/lib \
 	--enable-cross-compile \
@@ -282,20 +285,20 @@ make_ffmpeg() {
 
 echo "Using ${BUILD_HOST}-gcc"
 make_dirs
-download_package
-tar_package
+# download_package
+# tar_package
 set_env
 
 # make_sdl
-# make_x264
+make_x264
 # make_x265
-# prepare_other_lib
-# make_ffmpeg
+prepare_other_lib
+make_ffmpeg
 
 # 可以不用编译
 # make_harfbuzz
 
-# make_freetype
+make_freetype
 
 make_opencv
 
