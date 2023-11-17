@@ -64,7 +64,7 @@ ffmpeg -re -stream_loop -1 -i mask0.h264 -c copy -rtsp_transport tcp -f rtsp rts
 
 ffmpeg -f x11grab -r 10 -s 1280x720 -i :0.0+0,0 -preset superfast -tune zerolatency -pix_fmt yuv420p -c:v libx264 -c:a aac -r 10 -b:v 2M -b:a 128k -f flv rtsp://192.168.2.4:8554/live/1
 
-ffmpeg -f x11grab -r 10 -s 1280x720 -i :0.0+0,0 -preset superfast -tune zerolatency -pix_fmt yuv420p -c:v libx264 -c:a aac -r 10 -b:v 2M -b:a 128k -f flv rtmp://192.168.2.4:1935/live/1
+ffmpeg -f x11grab -r 10 -s 1280x720 -i :0.0+0,0 -preset superfast -tune zerolatency -pix_fmt yuv420p -c:v libx264 -c:a aac -r 10 -b:v 2M -b:a 128k -f flv rtmp://localhost/myapp/mystream
 
 #f x11grab -r 10 -s 1920x1080 -i :0.0+0,0: 屏幕捕捉帧率为10，图像像素为1920x1080，像素区域为从做上角0.0区域开始计算；
 #pix_fmt yuv420p：像素格式为yuv420p（4:2:0 YUV）；
@@ -84,6 +84,9 @@ docker run --rm -it \
 -p 8888:8888 \
 -p 8889:8889 \
 bluenviron/mediamtx
+
+ffmpeg -thread_queue_size 512 -re -i "rtsp://admin:ad123456@192.168.137.61:554/cam/realmonitor?channel=1&subtype=0"  -c copy -rtsp_transport tcp  -f rtsp rtsp://localhost/camtest
+
 
 ```
 
