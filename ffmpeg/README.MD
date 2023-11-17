@@ -23,3 +23,8 @@
 ```
 
 ## 教程
+
+
+编译文档
+
+https://trac.ffmpeg.org/wiki/CompilationGuide
