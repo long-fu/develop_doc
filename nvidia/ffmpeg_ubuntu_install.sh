@@ -74,11 +74,11 @@ sudo apt-get -y install \
     libaom-dev \
     nvidia-cuda-toolkit
 
-mkdir ~/app
-cd ~/app
+# mkdir ~/app
+# cd ~/app
 
 # #create working directory
-mkdir ~/app/ffmpeg_sources
+# mkdir ~/app/ffmpeg_sources
 
 #install CUDA SDK
 #echo "Installing CUDA and the latest driver repositories from repositories"
@@ -101,11 +101,9 @@ cd ~/app
 echo "Compiling ffmpeg"
 cd ~/app
 git clone https://github.com/FFmpeg/FFmpeg -b master
-cd FFmpeg
+# cd FFmpeg
 
 ./configure \
-  --extra-cflags="-I/usr/include" \
-  --extra-ldflags="-L/usr/lib" \
   --extra-cflags="-I/usr/local/cuda/include/" \
   --extra-ldflags="-L/usr/local/cuda/lib64/" \
   --extra-cflags=-I/usr/local/include/ \
@@ -125,8 +123,6 @@ cd FFmpeg
   --enable-libx265 \
   --enable-nonfree \
   --enable-nvenc \
-  --enable-decklink \
-  --enable-libsvtav1 \
   --enable-gnutls \
   --enable-libmp3lame \
   --enable-libdav1d \

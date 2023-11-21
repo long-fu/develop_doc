@@ -28,7 +28,9 @@ lspci |grep -i vga
 conda create -n your_env_name python=X.X（3.6、3.7等）
 
 conda create -n yolo_v5 python=3.7
- 
+
+conda create -n pytorch python=3.8
+
 #激活虚拟环境
 source activate your_env_name(虚拟环境名称)
  
