@@ -106,8 +106,6 @@ git clone https://github.com/FFmpeg/FFmpeg -b master
 ./configure \
   --extra-cflags="-I/usr/local/cuda/include/" \
   --extra-ldflags="-L/usr/local/cuda/lib64/" \
-  --extra-cflags=-I/usr/local/include/ \
-  --extra-ldflags=-L/usr/local/include/ \
   --extra-libs="-lpthread -lm" \
   --ld="g++" \
   --enable-cuda-nvcc \

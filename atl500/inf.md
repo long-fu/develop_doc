@@ -206,6 +206,165 @@ atlas_yolov5
 
 ```
 
+**推理**
+
+```cpp
+#include <iostream>
+#include <sys/timeb.h>
+#include "acl/acl.h"
+#include "AclLiteApp.h"
+#include "AclLiteModel.h"
+#include "inference.h"
+#include "object_detection.h"
+#include "utils.h"
+#include <chrono>
+
+static void infer_time_d(float duration)
+{
+    static int count = 0;
+    static float max = INT16_MIN;
+    static float min = INT32_MAX;
+    static float tD = 0;
+    tD = tD + duration;
+    count++;
+    float avg = tD / float(count);
+    max = duration > max ? duration : max;
+    min = duration < min ? duration : min;
+
+    // printf("[infer time] duration %f ms & avg %f ms & min %f ms & max %f ms \r\n", duration, avg, min, max);
+}
+
+using namespace std;
+
+Inference::Inference(const string &modelPath,
+                     uint32_t modelWidth, uint32_t modelHeight) : model_(modelPath), modelWidth_(modelWidth), modelHeight_(modelHeight)
+{
+    //  imageInfoSize_ = 0;
+    //   imageInfoBuf_ = nullptr;
+}
+
+Inference::~Inference()
+{
+    model_.DestroyResource();
+}
+
+AclLiteError Inference::Init()
+{
+    AclLiteError ret = model_.Init();
+    if (ret != ACLLITE_OK)
+    {
+        ACLLITE_LOG_ERROR("Model init failed, error:%d", ret);
+        return ret;
+    }
+
+    ret = aclrtGetRunMode(&runMode_);
+    if (ret != ACL_SUCCESS)
+    {
+        ACLLITE_LOG_ERROR("acl get run mode failed");
+        return ACLLITE_ERROR;
+    }
+
+    // const float imageInfo[4] = {(float)modelWidth_, (float)modelHeight_,
+    //  (float)modelWidth_, (float)modelHeight_};
+    //  imageInfoSize_ = sizeof(imageInfo);
+    //  imageInfoBuf_ = CopyDataToDevice((void *)imageInfo, imageInfoSize_,
+    //                                       runMode_, MEMORY_DEVICE);
+    // if (imageInfoBuf_ == nullptr) {
+    //     ACLLITE_LOG_ERROR("Copy image info to device failed");
+    //      return ACLLITE_ERROR;
+    //   }
+
+    return ACLLITE_OK;
+}
+
+AclLiteError Inference::Execute(vector<InferenceOutput> &inferenceOutput,
+                                ImageData &resizedImage)
+{
+    // yolov3
+    // AclLiteError ret = model_.CreateInput(resizedImage.data.get(),
+    //                                    resizedImage.size, imageInfoBuf_, imageInfoSize_);
+    // yolov5
+    AclLiteError ret = model_.CreateInput(resizedImage.data.get(), resizedImage.size);
+    // cout << "resizeimage_size: " << resizedImage.size << endl;
+    if (ret != ACLLITE_OK)
+    {
+        ACLLITE_LOG_ERROR("Create mode input dataset failed, error:%d", ret);
+        return ACLLITE_ERROR;
+    }
+
+    ret = model_.Execute(inferenceOutput);
+    if (ret != ACLLITE_OK)
+    {
+        model_.DestroyInput();
+        ACLLITE_LOG_ERROR("Execute model inference failed, error: %d", ret);
+        return ACLLITE_ERROR;
+    }
+
+    model_.DestroyInput();
+
+    return ACLLITE_OK;
+}
+
+AclLiteError Inference::FrameImageProcess(
+    shared_ptr<PreprocDataMsg> preprocData)
+{
+    shared_ptr<InferOutputMsg> inferMsg = make_shared<InferOutputMsg>();
+
+    if (preprocData->isLastFrame)
+    {
+        inferMsg->isLastFrame = preprocData->isLastFrame;
+        SendMessage(preprocData->postprocThreadId, MSG_DECODE_FINISH, inferMsg);
+        return ACLLITE_OK;
+    }
+
+    std::chrono::time_point<std::chrono::steady_clock> t2, t3;
+    std::chrono::duration<float> duration1;
+    t2 = std::chrono::steady_clock::now();
+
+    // 推理
+    AclLiteError ret = Execute(inferMsg->inferData, preprocData->resizedImage);
+    if (ret != ACLLITE_OK)
+    {
+        ACLLITE_LOG_ERROR("Inference frame failed, error %d", ret);
+        return ret;
+    }
+
+    t3 = std::chrono::steady_clock::now();
+    duration1 = t3 - t2;
+
+    // std::cout << "[inference time](" << preprocData->channelId << "): " << duration1.count() * 1000.0f << " ms" << std::endl;
+    infer_time_d(duration1.count() * 1000.0f);
+
+    inferMsg->originalImage = preprocData->originalImage;
+    inferMsg->isLastFrame = preprocData->isLastFrame;
+    inferMsg->frameWidth = preprocData->frameWidth;
+    inferMsg->frameHeight = preprocData->frameHeight;
+    inferMsg->channelId = preprocData->channelId;
+    inferMsg->encoderThreadId = preprocData->encoderThreadId;
+    inferMsg->pushThreadId = preprocData->pushThreadId;
+
+    SendMessage(preprocData->postprocThreadId, MSG_INFER_OUTPUT, inferMsg);
+
+    return ACLLITE_OK;
+}
+
+AclLiteError Inference::Process(int msgId, shared_ptr<void> data)
+{
+    switch (msgId)
+    {
+    case MSG_PREPROC_DATA:
+        FrameImageProcess(static_pointer_cast<PreprocDataMsg>(data));
+        break;
+    default:
+        ACLLITE_LOG_INFO("Inference thread ignore msg %d", msgId);
+        break;
+    }
+
+    return ACLLITE_OK;
+}
+
+```
+
 **dvpp硬解码**
 
 - [VDEC视频解码](https://www.hiascend.com/document/detail/zh/canncommercial/601/inferapplicationdev/aclcppdevg/aclcppdevg_000059.html)
