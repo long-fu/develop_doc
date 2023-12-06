@@ -154,3 +154,9 @@ ABR	|基本稳定|	变化|	可控
 <br/>
 
 文章原作者：  音视频开发训练营
+
+
+---------------
+
+
+[视频参考文章](https://www.yuque.com/keith-an9fr/aab7xp/uzazfb)
