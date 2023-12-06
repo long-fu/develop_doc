@@ -18,3 +18,6 @@
 [音视频播放过程中的问题解决(播放质量优化)](https://juejin.cn/post/6844904089193545741)
 
 [H.264码流结构 (H.264 Data Structure)](https://juejin.cn/post/6844903566209990669)
+
+[FFmpeg时间戳详解](https://www.cnblogs.com/leisure_chn/p/10584910.html)
+[FFmpeg数据结构AVFrame](https://www.cnblogs.com/leisure_chn/p/10404502.html)
