@@ -50,3 +50,4 @@ ultrafast, superfast, veryfast, faster, fast, medium, slow, slower, veryslow and
 CRF(Constant Rate Factor): 范围 0-51: 0是编码毫无丢失信息, 23 is 默认, 51 是最差的情况。相对合理的区间是18-28. 
 值越大，压缩效率越高，但也意味着信息丢失越严重，输出图像质量越差。
 
+## 说一说ffmpeg的数据结构？

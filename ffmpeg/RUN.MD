@@ -66,6 +66,8 @@ ffmpeg -f x11grab -r 10 -s 1280x720 -i :0.0+0,0 -preset superfast -tune zerolate
 
 ffmpeg -f x11grab -r 10 -s 1280x720 -i :0.0+0,0 -preset superfast -tune zerolatency -pix_fmt yuv420p -c:v libx264 -c:a aac -r 10 -b:v 2M -b:a 128k -f flv rtmp://localhost/myapp/mystream
 
+ffmpeg -i "rtsp://admin:ad123456@192.168.137.50:554/h264" -c copy -rtsp_transport tcp  -f rtsp rtsp://localhost:8554/camtest
+
 #f x11grab -r 10 -s 1920x1080 -i :0.0+0,0: 屏幕捕捉帧率为10，图像像素为1920x1080，像素区域为从做上角0.0区域开始计算；
 #pix_fmt yuv420p：像素格式为yuv420p（4:2:0 YUV）；
 #preset superfast -tune zerolatency：实时编码；
